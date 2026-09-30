@@ -1,7 +1,7 @@
 # routes
 This package contains all the routes for the schej.it API
 
-To view the docs, visit http://localhost:3002/swagger/index.html
+Swagger documentation is currently disabled in the running server.
 
 ## How to document routes
 Visit https://github.com/swaggo/swag for a comprehensive overview of the swagger comment structure

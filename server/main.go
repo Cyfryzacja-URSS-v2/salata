@@ -27,10 +27,6 @@ import (
 	"schej.it/server/slackbot"
 	"schej.it/server/utils"
 
-	swaggerfiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
-
-	_ "schej.it/server/docs"
 )
 
 // @title Schej.it API
@@ -169,9 +165,6 @@ func main() {
 		logger.StdErr.Printf("Warning: index.html not found at %s", indexPath)
 	}
 	router.NoRoute(noRouteHandler())
-
-	// Init swagger documentation
-	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
 
 	// Run server
 	if os.Getenv("NODE_ENV") == "staging" {

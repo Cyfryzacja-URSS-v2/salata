@@ -1,6 +1,6 @@
 # Schej.it API
 
-API docs (available when the server is running): http://localhost:3002/swagger/index.html
+Swagger documentation is currently disabled in the running server.
 
 ## Debug
 
