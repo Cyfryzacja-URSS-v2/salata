@@ -1,8 +1,5 @@
 <template>
   <span>
-    <FormerlyKnownAs
-      class="tw-mx-auto tw-mb-10 tw-mt-3 tw-max-w-6xl tw-pl-4 sm:tw-pl-12"
-    />
     <!-- Video Ad (desktop only, when ads enabled) -->
     <div v-if="!isPhone && showAds" ref="videoAdContainer"></div>
     <div v-if="event" class="tw-mt-8 tw-h-full">
@@ -70,27 +67,27 @@
         @input="pagesNotVisitedUnderstood = false"
       >
         <v-card>
-          <v-card-title>Are you sure?</v-card-title>
+          <v-card-title>Czy na pewno?</v-card-title>
           <v-card-text>
             <p>
               <span class="tw-font-bold"
-                >You haven't filled out all pages of this Timeful.</span
+                >Nie uzupełniono wszystkich stron tego wydarzenia.</span
               >
-              Availability for the pages you didn't visit won't be saved.
+              Dostępność na pominiętych stronach nie zostanie zapisana.
             </p>
             <p>
-              Click the left and right arrows at the top to switch between
-              pages.
+              Kliknij strzałki po lewej i prawej stronie u góry, aby przełączać
+              strony.
             </p>
 
-            <v-checkbox
+              <v-checkbox
               v-model="pagesNotVisitedUnderstood"
               class="tw-mt-3"
               dense
-              messages="Not recommended"
+                messages="Niezalecane"
             >
               <template v-slot:label>
-                <span class="tw-text-sm tw-text-black">I understand</span>
+                <span class="tw-text-sm tw-text-black">Rozumiem</span>
               </template>
               <template v-slot:message="{ message }">
                 <div
@@ -103,7 +100,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <v-btn text @click="pagesNotVisitedDialog = false">Cancel</v-btn>
+            <v-btn text @click="pagesNotVisitedDialog = false">Anuluj</v-btn>
             <v-btn
               depressed
               color="error"
@@ -115,7 +112,7 @@
                   this.pagesNotVisitedDialog = false
                 }
               "
-              >Save anyways</v-btn
+              >Zapisz mimo to</v-btn
             >
           </v-card-actions>
         </v-card>
@@ -162,7 +159,7 @@
                     :href="`https://when2meet.com${event.when2meetHref}`"
                     :small="isPhone"
                     class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
-                    >Imported from when2meet</v-chip
+                    >Zaimportowano z when2meet</v-chip
                   >
                   <template v-if="isGroup">
                     <div class="">
@@ -170,15 +167,15 @@
                         :small="isPhone"
                         class="tw-cursor-pointer tw-select-none tw-rounded tw-bg-light-gray tw-px-2 tw-font-medium sm:tw-px-3"
                         @click="helpDialog = true"
-                        >Availability group</v-chip
+                        >Grupa dostępności</v-chip
                       >
                     </div>
                     <HelpDialog v-model="helpDialog">
-                      <template v-slot:header>Availability group</template>
+                      <template v-slot:header>Grupa dostępności</template>
                       <div class="mb-4">
-                        Use availability groups to see group members' weekly
-                        calendar availabilities from Google Calendar. Your
-                        actual calendar events are NOT visible to others.
+                        Grupy dostępności pozwalają sprawdzać tygodniową
+                        dostępność członków na podstawie Kalendarza Google.
+                        Twoje wydarzenia z kalendarza nie są widoczne dla innych.
                       </div>
                     </HelpDialog>
                   </template>
@@ -196,7 +193,7 @@
                       class="tw-px-2 tw-text-sm tw-text-green"
                       text
                     >
-                      Edit {{ isGroup ? "group" : "event" }}
+                      Edytuj {{ isGroup ? "grupę" : "wydarzenie" }}
                     </v-btn>
                   </template>
                 </div>
@@ -214,7 +211,7 @@
                     @click="resetWeekOffset"
                   >
                     <v-icon class="sm:tw-mr-2">mdi-calendar-today</v-icon>
-                    <span v-if="!isPhone">Today</span>
+                    <span v-if="!isPhone">Dzisiaj</span>
                   </v-btn>
                   <v-btn
                     :icon="isPhone"
@@ -224,7 +221,7 @@
                     :loading="loading"
                   >
                     <v-icon class="tw-mr-1" v-if="!isPhone">mdi-refresh</v-icon>
-                    <span v-if="!isPhone" class="tw-mr-2">Refresh</span>
+                    <span v-if="!isPhone" class="tw-mr-2">Odśwież</span>
                     <v-icon class="tw-text-green" v-else>mdi-refresh</v-icon>
                   </v-btn>
                 </div>
@@ -236,7 +233,7 @@
                     @click="copyLink"
                   >
                     <span v-if="!isPhone" class="tw-mr-2 tw-text-green"
-                      >Copy link</span
+                      >Kopiuj link</span
                     >
                     <v-icon class="tw-text-green" v-if="!isPhone"
                       >mdi-content-copy</v-icon
@@ -258,8 +255,8 @@
                     >
                       {{
                         event.blindAvailabilityEnabled
-                          ? "Edit availability"
-                          : `Edit ${selectedGuestRespondent}'s availability`
+                          ? "Edytuj dostępność"
+                          : `Edytuj dostępność użytkownika ${selectedGuestRespondent}`
                       }}
                     </v-btn>
                     <v-btn
@@ -280,14 +277,14 @@
                       @click="cancelEditing"
                       outlined
                     >
-                      Cancel
+                      Anuluj
                     </v-btn>
                     <v-btn
                       class="tw-w-20 tw-text-white"
                       :class="'tw-bg-green'"
                       @click="() => saveChanges()"
                     >
-                      Save
+                      Zapisz
                     </v-btn></template
                   >
                 </div>
@@ -370,7 +367,7 @@
             href="https://forms.gle/A96i4TTWeKgH3P1W6"
             target="_blank"
           >
-            Give feedback to Timeful team
+            Przekaż opinię zespołowi Sałata
           </v-btn>
           <!-- <div
             class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
@@ -387,22 +384,8 @@
           <div
             class="tw-w-full tw-border-t tw-border-solid tw-border-gray"
           ></div>
-          <v-btn class="tw-h-16" block text :to="{ name: 'privacy-policy' }">
-            Privacy Policy
-          </v-btn>
         </div>
       </template>
-
-      <div
-        class="tw-mb-16 tw-hidden tw-flex-col tw-items-center tw-justify-between sm:tw-flex"
-      >
-        <router-link
-          class="tw-text-xs tw-font-medium tw-text-gray"
-          :to="{ name: 'privacy-policy' }"
-        >
-          Privacy Policy
-        </router-link>
-      </div>
 
       <div
         :class="isPhone ? (showAds ? 'tw-h-[125px]' : 'tw-h-8') : 'tw-h-8'"
@@ -425,7 +408,7 @@
               text
               class="tw-text-white"
               @click="scheduleEvent"
-              >Schedule</v-btn
+              >Zaplanuj</v-btn
             >
             <v-spacer />
             <v-btn
@@ -448,19 +431,19 @@
           </template>
           <template v-else-if="isEditing">
             <v-btn text class="tw-text-white" @click="cancelEditing">
-              Cancel
+              Anuluj
             </v-btn>
             <v-spacer />
             <v-btn
               class="tw-bg-white tw-text-green"
               @click="() => saveChanges()"
             >
-              Save
+              Zapisz
             </v-btn>
           </template>
           <template v-else-if="isScheduling">
             <v-btn text class="tw-text-white" @click="cancelScheduleEvent">
-              Cancel
+              Anuluj
             </v-btn>
             <v-spacer />
             <v-btn
@@ -468,7 +451,7 @@
               class="tw-bg-white tw-text-blue"
               @click="confirmScheduleEvent"
             >
-              Schedule
+              Zaplanuj
             </v-btn>
           </template>
         </div>
@@ -552,7 +535,6 @@ import MarkAvailabilityDialog from "@/components/calendar_permission_dialogs/Mar
 import InvitationDialog from "@/components/groups/InvitationDialog.vue"
 import HelpDialog from "@/components/HelpDialog.vue"
 import EventDescription from "@/components/event/EventDescription.vue"
-import FormerlyKnownAs from "@/components/FormerlyKnownAs.vue"
 import CarbonAd from "@/components/event/CarbonAd.vue"
 import PubliftAd from "@/components/event/PubliftAd.vue"
 export default {
@@ -577,7 +559,6 @@ export default {
     InvitationDialog,
     HelpDialog,
     EventDescription,
-    FormerlyKnownAs,
     CarbonAd,
     PubliftAd,
   },
@@ -700,18 +681,18 @@ export default {
       return this.scheduleOverlapComponent?.respondents.length
     },
     actionButtonText() {
-      if (this.isSignUp) return "Edit slots"
-      else if (this.userHasResponded || this.isGroup) return "Edit availability"
-      return "Add availability"
+      if (this.isSignUp) return "Edytuj miejsca"
+      else if (this.userHasResponded || this.isGroup) return "Edytuj dostępność"
+      return "Dodaj dostępność"
     },
     mobileGuestActionButtonText() {
       return this.event.blindAvailabilityEnabled
-        ? "Edit availability"
-        : `Edit ${this.selectedGuestRespondent}'s availability`
+        ? "Edytuj dostępność"
+        : `Edytuj dostępność użytkownika ${this.selectedGuestRespondent}`
     },
     mobileActionButtonText() {
-      if (this.isSignUp) return "Edit slots"
-      return this.userHasResponded ? "Edit availability" : "Add availability"
+      if (this.isSignUp) return "Edytuj miejsca"
+      return this.userHasResponded ? "Edytuj dostępność" : "Dodaj dostępność"
     },
     isIOS() {
       return isIOS()
@@ -818,7 +799,7 @@ export default {
         await this.scheduleOverlapComponent.deleteAvailability()
       }
 
-      this.showInfo(this.isGroup ? "Left group!" : "Availability deleted!")
+      this.showInfo(this.isGroup ? "Opuszczono grupę." : "Dostępność usunięta.")
       this.scheduleOverlapComponent.stopEditing()
     },
 
@@ -973,7 +954,7 @@ export default {
       }
 
       if (changesPersisted) {
-        this.showInfo("Changes saved!")
+        this.showInfo("Zmiany zapisane.")
         this.scheduleOverlapComponent.stopEditing()
       }
     },
@@ -984,7 +965,7 @@ export default {
       if (payload.name.length > 0) {
         await this.scheduleOverlapComponent.submitAvailability(payload)
 
-        this.showInfo("Changes saved!")
+        this.showInfo("Zmiany zapisane.")
         this.scheduleOverlapComponent.resetCurUserAvailability()
         this.scheduleOverlapComponent.stopEditing()
         this.guestDialog = false
@@ -1910,7 +1891,7 @@ export default {
     } catch (err) {
       switch (err.error) {
         case errors.EventNotFound:
-          this.showError("The specified event does not exist!")
+          this.showError("Podane wydarzenie nie istnieje.")
           this.$router.replace({ name: "home" })
           return
       }
@@ -1948,7 +1929,7 @@ export default {
         this.$nextTick(() => {
           this.scheduleOverlapComponent = this.$refs.scheduleOverlap
         })
-        document.title = `${this.event.name} - Timeful`
+        document.title = `${this.event.name} - Sałata URSS`
       }
     },
     ownerPremiumChecked(val) {

@@ -7,7 +7,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Join slot <span v-if="!authUser">as</span></div>
+        <div>Dołącz do miejsca <span v-if="!authUser">jako</span></div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -30,7 +30,7 @@
               v-model="name"
               @keyup.enter="submit"
               :rules="nameRules"
-              placeholder="Enter your name..."
+              placeholder="Wpisz swoje imię i nazwisko..."
               autofocus
               hide-details="auto"
               autocomplete="off"
@@ -41,25 +41,24 @@
               v-model="email"
               @keyup.enter="submit"
               :rules="emailRules"
-              placeholder="Enter your email..."
-              hint="The event creator has requested your email. It will only be visible to them."
+              placeholder="Wpisz adres e-mail..."
+              hint="Twórca wydarzenia poprosił o Twój adres e-mail. Będzie widoczny tylko dla niego."
               persistent-hint
               solo
             ></v-text-field>
           </div>
 
           <div>
-            NOTE: After joining a slot,
+            Uwaga: po dołączeniu do miejsca
             <span class="tw-font-bold"
-              >you will need to contact the sign up creator in order to edit
-              your slot.</span
+              >aby edytować swoje miejsce, musisz skontaktować się z twórcą zapisów.</span
             >
           </div>
 
           <div v-if="event.blindAvailabilityEnabled">
-            The sign up creator has hidden attendees from each other.
+            Twórca zapisów ukrył uczestników przed sobą.
             <span class="tw-font-bold"
-              >Your name will only be visible to you.</span
+              >Twoje imię będzie widoczne tylko dla Ciebie.</span
             >
           </div>
 
@@ -71,7 +70,7 @@
               :dark="formValid"
               :disabled="!formValid"
             >
-              Join slot
+              Dołącz do miejsca
             </v-btn>
           </div>
         </v-form>

@@ -29,7 +29,7 @@ export default new Vuex.Store({
     signUpFormEnabled: false,
     daysOnlyEnabled: true,
     overlayAvailabilitiesEnabled: true,
-    enablePaywall: true,
+    enablePaywall: false,
 
     // Experiments
     pricingPageConversion: "control",
@@ -199,12 +199,12 @@ export default new Vuex.Store({
               commit("setFolders", folders.value)
               commit("setEvents", events.value)
             } else {
-              dispatch("showError", "There was a problem fetching events!")
+              dispatch("showError", "Nie udało się pobrać wydarzeń.")
               console.error(folders.reason, events.reason)
             }
           })
           .catch((err) => {
-            dispatch("showError", "There was a problem fetching events!")
+            dispatch("showError", "Nie udało się pobrać wydarzeń.")
             console.error(err)
           })
       } else {
@@ -219,7 +219,7 @@ export default new Vuex.Store({
           event.isArchived = archive
         }
       } catch (err) {
-        dispatch("showError", "There was a problem archiving the event!")
+        dispatch("showError", "Nie udało się zarchiwizować wydarzenia.")
         console.error(err)
       }
     },
@@ -233,7 +233,7 @@ export default new Vuex.Store({
           eventIds: [],
         })
       } catch (err) {
-        dispatch("showError", "There was a problem creating the folder!")
+        dispatch("showError", "Nie udało się utworzyć folderu.")
         console.error(err)
       }
     },
@@ -242,7 +242,7 @@ export default new Vuex.Store({
         await updateFolder(folderId, name, color)
         commit("updateFolder", { folderId, name, color })
       } catch (err) {
-        dispatch("showError", "There was a problem updating the folder!")
+        dispatch("showError", "Nie udało się zaktualizować folderu.")
         console.error(err)
       }
     },
@@ -251,7 +251,7 @@ export default new Vuex.Store({
         await deleteFolder(folderId)
         commit("removeFolder", folderId)
       } catch (err) {
-        dispatch("showError", "There was a problem deleting the folder!")
+        dispatch("showError", "Nie udało się usunąć folderu.")
         console.error(err)
       }
     },
@@ -261,7 +261,7 @@ export default new Vuex.Store({
         commit("addEventToFolder", { eventId, folderId })
         await setEventFolder(eventId, folderId)
       } catch (err) {
-        dispatch("showError", "There was a problem moving the event!")
+        dispatch("showError", "Nie udało się przenieść wydarzenia.")
         console.error(err)
       }
     },
@@ -269,10 +269,7 @@ export default new Vuex.Store({
       const authUser = await get("/user/profile")
       commit("setAuthUser", authUser)
     },
-    showUpgradeDialog({ commit }, { type, data = null }) {
-      commit("setUpgradeDialogVisible", true)
-      commit("setUpgradeDialogType", type)
-      commit("setUpgradeDialogData", data)
+    showUpgradeDialog() {
     },
     hideUpgradeDialog({ commit }) {
       commit("setUpgradeDialogVisible", false)

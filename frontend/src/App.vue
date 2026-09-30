@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <DiscordBanner />
     <AutoSnackbar color="error" :text="error" />
     <AutoSnackbar color="tw-bg-blue" :text="info" />
     <SignInNotSupportedDialog v-model="webviewDialog" />
@@ -20,7 +19,6 @@
       :value="upgradeDialogVisible"
       @input="handleUpgradeDialogInput"
     />
-    <UpvoteRedditSnackbar />
     <div
       v-if="showHeader"
       class="tw-fixed tw-z-40 tw-h-14 tw-w-screen tw-bg-white sm:tw-h-16"
@@ -30,16 +28,8 @@
         class="tw-relative tw-m-auto tw-flex tw-h-full tw-max-w-6xl tw-items-center tw-justify-center tw-px-4"
       >
         <router-link :to="{ name: 'home' }">
-          <Logo type="timeful" />
+          <span class="tw-text-2xl tw-font-bold">Sałata URSS</span>
         </router-link>
-        <v-expand-x-transition>
-          <span
-            v-if="isPremiumUser"
-            class="tw-ml-2 tw-cursor-default tw-rounded-md tw-bg-[linear-gradient(-25deg,#0a483d,#00994c,#126045,#0a483d)] tw-px-2 tw-py-1 tw-text-sm tw-font-semibold tw-text-white tw-opacity-80"
-          >
-            Premium
-          </span>
-        </v-expand-x-transition>
 
         <v-spacer />
 
@@ -49,26 +39,8 @@
           text
           @click="() => _createNew(true)"
         >
-          Create an event
+          Utwórz wydarzenie
         </v-btn>
-        <v-btn
-          v-if="showFeedbackBtn"
-          id="feedback-btn"
-          text
-          href="https://forms.gle/A96i4TTWeKgH3P1W6"
-          target="_blank"
-          @click="trackFeedbackClick"
-        >
-          Give feedback
-        </v-btn>
-        <!-- <v-btn
-          v-if="!isPhone"
-          text
-          href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
-          target="_blank"
-        >
-          Donate
-        </v-btn> -->
         <v-btn
           v-if="$route.name === 'home' && !isPhone"
           color="primary"
@@ -78,13 +50,13 @@
           }"
           @click="() => _createNew()"
         >
-          + Create new
+          + Utwórz spotkanie
         </v-btn>
         <div v-if="authUser" class="sm:tw-ml-4">
           <AuthUserMenu />
         </div>
         <v-btn v-else id="top-right-sign-in-btn" text @click="signIn">
-          Sign in
+          Zaloguj się
         </v-btn>
       </div>
     </div>
@@ -239,23 +211,14 @@ import {
   signInOutlook,
   isPremiumUser,
 } from "@/utils"
-import {
-  authTypes,
-  calendarTypes,
-  eventTypes,
-  numFreeEvents,
-  upgradeDialogTypes,
-} from "@/constants"
+import { authTypes, calendarTypes } from "@/constants"
 import AutoSnackbar from "@/components/AutoSnackbar"
 import AuthUserMenu from "@/components/AuthUserMenu.vue"
 import SignInNotSupportedDialog from "@/components/SignInNotSupportedDialog.vue"
-import UpvoteRedditSnackbar from "@/components/UpvoteRedditSnackbar.vue"
-import Logo from "@/components/Logo.vue"
 import isWebview from "is-ua-webview"
 import NewDialog from "./components/NewDialog.vue"
 import UpgradeDialog from "@/components/pricing/UpgradeDialog.vue"
 import SignInDialog from "@/components/SignInDialog.vue"
-import DiscordBanner from "@/components/DiscordBanner.vue"
 
 export default {
   name: "App",
@@ -271,11 +234,8 @@ export default {
     AuthUserMenu,
     SignInNotSupportedDialog,
     NewDialog,
-    UpvoteRedditSnackbar,
-    Logo,
     UpgradeDialog,
     SignInDialog,
-    DiscordBanner,
   },
 
   data: () => ({
@@ -304,7 +264,6 @@ export default {
         this.$route.name !== "landing" &&
         this.$route.name !== "auth" &&
         this.$route.name !== "sign-in" &&
-        this.$route.name !== "sign-up" &&
         this.$route.name !== "privacy-policy"
       )
     },

@@ -689,7 +689,7 @@ export default {
         }
         this.$emit("input", false)
         this.$router.push({
-          name: "sign-up",
+          name: "sign-in",
           query: {
             redirect: "upgrade",
             upgradeParams: JSON.stringify(upgradeParams),

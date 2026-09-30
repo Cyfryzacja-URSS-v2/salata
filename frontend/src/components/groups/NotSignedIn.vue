@@ -21,11 +21,11 @@
         </div>
       </div>
       <v-btn @click="join" color="primary" class="tw-mb-8"
-        >Join with Google Calendar</v-btn
+        >Dołącz przez Kalendarz Google</v-btn
       >
       <div class="tw-text-center tw-text-dark-gray">
-        Already have a Timeful account?
-        <a @click="signIn" class="tw-underline">Sign in</a>
+        Masz już konto Sałata?
+        <a @click="signIn" class="tw-underline">Zaloguj się</a>
       </div>
 
       <v-dialog

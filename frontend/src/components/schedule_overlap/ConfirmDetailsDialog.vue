@@ -6,7 +6,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Confirm details</div>
+        <div>Potwierdź szczegóły</div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -16,17 +16,17 @@
         <v-expansion-panels accordion mandatory flat>
           <v-expansion-panel>
             <v-expansion-panel-header class="tw-font-medium">
-              Attendees
+              Uczestnicy
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <div class="tw-mb-4 tw-text-dark-gray">
-                Google Calendar invites will be sent to people at the following
-                email addresses.
+                Zaproszenia Kalendarza Google zostaną wysłane na następujące
+                adresy e-mail.
                 <span v-if="!hasContactsAccess">
                   <a class="tw-underline" @click="requestContactsAccess"
-                    >Enable contacts access</a
+                    >Włącz dostęp do kontaktów</a
                   >
-                  to receive email auto-suggestions.
+                  , aby otrzymywać podpowiedzi adresów e-mail.
                 </span>
               </div>
               <div class="tw-max-h-96 tw-table-auto tw-overflow-y-auto">
@@ -36,12 +36,12 @@
                       <th
                         class="tw-sticky tw-top-0 tw-z-10 tw-bg-white tw-pb-4"
                       >
-                        Name
+                        Imię i nazwisko
                       </th>
                       <th
                         class="tw-sticky tw-top-0 tw-z-10 tw-bg-white tw-pb-4"
                       >
-                        Email
+                        E-mail
                       </th>
                     </tr>
                   </thead>
@@ -76,7 +76,7 @@
                           return-object
                           append-icon=""
                           class="tw-pt-2"
-                          placeholder="Email (optional)"
+                          placeholder="E-mail (opcjonalnie)"
                           outlined
                           dense
                           :rules="[rules.validEmail]"
@@ -109,20 +109,20 @@
           </v-expansion-panel>
           <v-expansion-panel>
             <v-expansion-panel-header class="tw-font-medium">
-              Location & description (optional)
+              Lokalizacja i opis (opcjonalnie)
             </v-expansion-panel-header>
             <v-expansion-panel-content>
               <v-text-field
                 v-model="location"
                 prepend-icon="mdi-map-marker"
-                placeholder="Location"
+                placeholder="Lokalizacja"
                 outlined
                 dense
               />
               <v-textarea
                 v-model="description"
                 prepend-icon="mdi-text"
-                placeholder="Description"
+                placeholder="Opis"
                 outlined
                 dense
                 hide-details
@@ -139,7 +139,7 @@
           :disabled="!confirmEnabled"
           :loading="loading"
         >
-          Confirm
+          Potwierdź
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -171,7 +171,7 @@ export default {
     rules: {
       validEmail: (email) => {
         if (email?.length > 0 && !validateEmail(email)) {
-          return "Please enter a valid email."
+          return "Wpisz prawidłowy adres e-mail."
         }
         return true
       },

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="tw-mb-1 tw-text-sm tw-text-black">Working hours</div>
+    <div class="tw-mb-1 tw-text-sm tw-text-black">Godziny pracy</div>
     <div class="tw-mb-2 tw-text-xs tw-text-dark-gray">
-      Only autofill availability between working hours
+      Automatycznie uzupełniaj dostępność tylko w godzinach pracy
     </div>
     <v-switch
       id="working-hours-toggle"
@@ -30,7 +30,7 @@
                 }
               "
             />
-            <div>to</div>
+            <div>do</div>
             <v-select
               menu-props="auto"
               dense

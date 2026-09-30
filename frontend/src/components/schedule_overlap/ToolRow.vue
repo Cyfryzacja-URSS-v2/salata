@@ -35,7 +35,7 @@
           v-if="isPhone && !event.daysOnly"
           class="tw-flex tw-basis-full tw-items-center tw-gap-x-2 tw-py-4"
         >
-          Show
+          Pokaż
           <v-select
             :value="mobileNumDays"
             @input="$emit('update:mobileNumDays', $event)"
@@ -47,7 +47,7 @@
             dense
             hide-details
           />
-          at a time
+          jednocześnie
         </div>
 
         <template v-if="state !== states.EDIT_AVAILABILITY && isPhone">
@@ -95,7 +95,7 @@
             @click="(e) => $emit('scheduleEvent', e)"
           >
             <v-icon small>mdi-calendar-check</v-icon>
-            <span class="tw-ml-2">Schedule event</span>
+            <span class="tw-ml-2">Zaplanuj wydarzenie</span>
           </v-btn>
         </template>
         <template v-else>
@@ -104,7 +104,7 @@
             class="tw-mr-1 tw-text-red"
             @click="(e) => $emit('cancelScheduleEvent', e)"
           >
-            Cancel
+            Anuluj
           </v-btn>
           <v-menu offset-y class="tw-z-20">
             <template v-slot:activator="{ on, attrs }">
@@ -114,7 +114,7 @@
                 v-bind="attrs"
                 v-on="on"
               >
-                Schedule
+                Zaplanuj
               </v-btn>
             </template>
             <v-list dense>
@@ -206,8 +206,8 @@ export default {
 
   data: () => ({
     mobileNumDaysOptions: [
-      { label: "3 days", value: 3 },
-      { label: "7 days", value: 7 },
+      { label: "3 dni", value: 3 },
+      { label: "7 dni", value: 7 },
     ],
     timeTypeOptions: [
       { label: "12h", value: timeTypes.HOUR12 },

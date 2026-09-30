@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="tw-mb-1 tw-text-sm tw-text-black">Buffer time</div>
+    <div class="tw-mb-1 tw-text-sm tw-text-black">Bufor czasowy</div>
     <div class="tw-mb-2 tw-text-xs tw-text-dark-gray">
-      Add time around calendar events
+      Dodaj czas przed i po wydarzeniach kalendarza
     </div>
     <v-switch
       id="buffer-time-switch"
@@ -56,7 +56,7 @@ export default {
         { text: "15 min", value: 15 },
         { text: "30 min", value: 30 },
         { text: "45 min", value: 45 },
-        { text: "1 hour", value: 60 },
+        { text: "1 godzina", value: 60 },
       ],
     }
   },

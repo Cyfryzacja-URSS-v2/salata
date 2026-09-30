@@ -69,7 +69,7 @@
           <v-list class="tw-py-1" dense>
             <v-list-item @click="copyLink">
               <v-list-item-content>
-                <v-list-item-title>Copy link</v-list-item-title>
+                <v-list-item-title>Skopiuj link</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
             <v-divider />
@@ -82,24 +82,24 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-list-item id="duplicate-event-btn" v-bind="attrs" v-on="on">
                   <v-list-item-content>
-                    <v-list-item-title>Duplicate</v-list-item-title>
+                    <v-list-item-title>Duplikuj</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </template>
               <v-card>
-                <v-card-title>Duplicate {{ typeText }}</v-card-title>
+                <v-card-title>Duplikuj {{ typeText }}</v-card-title>
                 <v-card-text>
                   <v-text-field
                     v-model="duplicateDialogOptions.name"
                     required
-                    placeholder="Name your event..."
+                    placeholder="Nazwa Twojego wydarzenia..."
                     :disabled="duplicateDialogOptions.loading"
                     hide-details
                     solo
                   />
                   <v-checkbox
                     v-model="duplicateDialogOptions.copyAvailability"
-                    label="Copy responses"
+                    label="Skopiuj dostępność"
                     :disabled="duplicateDialogOptions.loading"
                     hide-details
                     class="tw-mt-2"
@@ -111,14 +111,14 @@
                     text
                     @click="duplicateDialog = false"
                     :disabled="duplicateDialogOptions.loading"
-                    >Cancel</v-btn
+                    >Anuluj</v-btn
                   >
                   <v-btn
                     text
                     color="primary"
                     @click="duplicateEvent"
                     :loading="duplicateDialogOptions.loading"
-                    >Confirm</v-btn
+                    >Potwierdź</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -136,7 +136,7 @@
                   v-on="onMenu"
                   class="tw-cursor-pointer tw-pr-1 hover:tw-bg-light-gray"
                 >
-                  <v-list-item-title>Move to</v-list-item-title>
+                  <v-list-item-title>Przenieś do</v-list-item-title>
                   <v-list-item-icon>
                     <v-icon small>mdi-chevron-right</v-icon>
                   </v-list-item-icon>
@@ -144,7 +144,7 @@
               </template>
               <v-list dense class="tw-py-1">
                 <v-list-item @click="moveEventToFolder(null)" class="tw-pr-1">
-                  <v-list-item-title>No folder</v-list-item-title>
+                  <v-list-item-title>Bez folderu</v-list-item-title>
                   <v-list-item-action v-if="folderId === null">
                     <v-icon small>mdi-check</v-icon>
                   </v-list-item-action>
@@ -165,7 +165,7 @@
             <v-divider />
             <v-list-item @click="_archiveEvent">
               <v-list-item-title>{{
-                event.isArchived ? "Unarchive" : "Archive"
+                event.isArchived ? "Przywróć" : "Zarchiwizuj"
               }}</v-list-item-title>
             </v-list-item>
             <v-dialog v-model="removeDialog" width="400" persistent>
@@ -177,21 +177,21 @@
                   v-on="on"
                 >
                   <v-list-item-content>
-                    <v-list-item-title>Delete {{ typeText }}</v-list-item-title>
+                    <v-list-item-title>Usuń {{ typeText }}</v-list-item-title>
                   </v-list-item-content>
                 </v-list-item>
               </template>
               <v-card>
-                <v-card-title>Are you sure?</v-card-title>
+                <v-card-title>Jesteś pewny?</v-card-title>
                 <v-card-text
-                  >Are you sure you want to delete this
+                  >Jesteś pewny, że chcesz usunąć
                   {{ typeText }}?</v-card-text
                 >
                 <v-card-actions>
                   <v-spacer />
-                  <v-btn text @click="removeDialog = false">Cancel</v-btn>
+                  <v-btn text @click="removeDialog = false">Anuluj</v-btn>
                   <v-btn text color="error" @click="removeEvent"
-                    >I'm sure</v-btn
+                    >Jestem pewny</v-btn
                   >
                 </v-card-actions>
               </v-card>
@@ -323,7 +323,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem removing that event! Please try again later."
+            "Nie udało się usunąć wydarzenia. Spróbuj ponownie później."
           )
         })
     },
@@ -349,7 +349,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "There was a problem duplicating that event! Please try again later."
+            "Nie udało się zduplikować wydarzenia. Spróbuj ponownie później."
           )
         })
         .finally(() => {

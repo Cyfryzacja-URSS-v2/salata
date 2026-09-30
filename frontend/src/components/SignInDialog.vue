@@ -8,7 +8,7 @@
     <v-card>
       <!-- Main sign-in screen -->
       <template v-if="step === 'select'">
-        <v-card-title>Sign in</v-card-title>
+        <v-card-title>Zaloguj się</v-card-title>
         <v-card-text class="tw-flex tw-flex-col tw-items-center">
           <div class="tw-mb-4 tw-flex tw-w-full tw-flex-col tw-gap-y-2">
             <v-btn
@@ -24,7 +24,7 @@
                   src="@/assets/google_logo.svg"
                 />
                 <v-spacer />
-                Continue with Google
+                Kontynuuj przez Google
                 <v-spacer />
               </div>
             </v-btn>
@@ -41,23 +41,23 @@
                   src="@/assets/outlook_logo.svg"
                 />
                 <v-spacer />
-                Continue with Outlook
+                Kontynuuj przez Outlook
                 <v-spacer />
               </div>
             </v-btn>
 
             <div class="tw-my-2 tw-flex tw-items-center tw-gap-3">
               <v-divider />
-              <span class="tw-text-gray-500 tw-text-xs">or</span>
+              <span class="tw-text-gray-500 tw-text-xs">lub</span>
               <v-divider />
             </div>
 
             <div>
-              <div class="tw-mb-1 tw-text-sm tw-font-medium">Email address</div>
+              <div class="tw-mb-1 tw-text-sm tw-font-medium">Adres e-mail</div>
               <v-text-field
                 v-model="email"
                 class="tw-mb-2"
-                placeholder="Enter your email..."
+                placeholder="Wpisz adres e-mail..."
                 type="email"
                 solo
                 hide-details="auto"
@@ -71,14 +71,14 @@
                 :disabled="sending"
                 @click="submitEmail"
               >
-                Continue with Email
+                Kontynuuj przez e-mail
               </v-btn>
             </div>
           </div>
           <div class="tw-text-center tw-text-xs">
-            By continuing, you agree to our
+            Kontynuując, akceptujesz naszą
             <router-link class="tw-text-blue" :to="{ name: 'privacy-policy' }"
-              >privacy policy</router-link
+              >politykę prywatności</router-link
             >
           </div>
         </v-card-text>
@@ -90,36 +90,36 @@
           <v-btn icon small @click="step = 'select'" class="tw-mr-1">
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          What's your name?
+          Jak masz na imię?
         </v-card-title>
         <v-card-text>
           <p class="tw-text-gray-600 tw-mb-4 tw-text-sm">
-            We just need a couple details to set up your account.
+            Potrzebujemy jeszcze kilku danych, aby utworzyć konto.
           </p>
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">First name</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">Imię</div>
           <v-text-field
             v-model="firstName"
-            placeholder="First name"
+            placeholder="Imię"
             solo
             hide-details="auto"
             autofocus
             @keydown.enter="$refs.lastNameField && $refs.lastNameField.focus()"
             class="tw-mb-3"
           />
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">Last name</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">Nazwisko</div>
           <v-text-field
             ref="lastNameField"
             v-model="lastName"
-            placeholder="Last name (optional)"
+            placeholder="Nazwisko (opcjonalnie)"
             solo
             hide-details="auto"
             @keydown.enter="submitOnboarding"
             class="tw-mb-3"
           />
-          <div class="tw-mb-1 tw-text-sm tw-font-medium">Email</div>
+          <div class="tw-mb-1 tw-text-sm tw-font-medium">E-mail</div>
           <v-text-field
             :value="email"
-            placeholder="Email..."
+            placeholder="E-mail..."
             solo
             hide-details="auto"
             disabled
@@ -133,7 +133,7 @@
             :disabled="!firstName.trim() || sending"
             @click="submitOnboarding"
           >
-            Continue
+            Kontynuuj
           </v-btn>
         </v-card-text>
       </template>
@@ -149,7 +149,7 @@
           >
             <v-icon>mdi-arrow-left</v-icon>
           </v-btn>
-          Enter verification code
+          Wpisz kod weryfikacyjny
         </v-card-title>
         <v-card-text>
           <p class="tw-text-gray-600 tw-mb-4 tw-text-sm">

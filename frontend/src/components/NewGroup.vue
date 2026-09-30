@@ -7,13 +7,13 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit group" : "New group" }}
+          {{ edit ? "Edytuj grupę" : "Nowa grupa" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
         >
-          Ideal for viewing weekly calendar availability
+          Idealne do wyświetlania tygodniowej dostępności kalendarza
         </div>
       </div>
       <v-spacer />
@@ -25,11 +25,11 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Availability groups</template>
+          <template v-slot:header>Grupy dostępności</template>
           <div class="mb-4">
-            Use availability groups to see group members' weekly calendar
-            availabilities from Google Calendar. Your actual calendar events
-            will NOT be visible to others.
+            Grupy dostępności pozwalają sprawdzać tygodniową dostępność członków
+            na podstawie Kalendarza Google. Twoje wydarzenia z kalendarza NIE
+            będą widoczne dla innych.
           </div>
         </HelpDialog>
       </template>
@@ -45,7 +45,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your group..."
+          placeholder="Nazwij grupę..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -54,7 +54,7 @@
         />
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Time range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">Zakres godzin</div>
           <div class="tw-flex tw-items-baseline tw-justify-center tw-space-x-2">
             <v-select
               v-model="startTime"
@@ -63,7 +63,7 @@
               hide-details
               solo
             ></v-select>
-            <div>to</div>
+            <div>do</div>
             <v-select
               v-model="endTime"
               menu-props="auto"
@@ -75,7 +75,7 @@
         </div>
 
         <div>
-          <div class="tw-mb-2 tw-text-lg tw-text-black">Day range</div>
+          <div class="tw-mb-2 tw-text-lg tw-text-black">Zakres dni</div>
           <v-input
             v-model="selectedDaysOfWeek"
             hide-details="auto"
@@ -87,20 +87,20 @@
               solo
               color="primary"
             >
-              <v-btn depressed v-show="!startOnMonday"> Sun </v-btn>
-              <v-btn depressed> Mon </v-btn>
-              <v-btn depressed> Tue </v-btn>
-              <v-btn depressed> Wed </v-btn>
-              <v-btn depressed> Thu </v-btn>
-              <v-btn depressed> Fri </v-btn>
-              <v-btn depressed> Sat </v-btn>
-              <v-btn depressed v-show="startOnMonday"> Sun </v-btn>
+              <v-btn depressed v-show="!startOnMonday"> Nd </v-btn>
+              <v-btn depressed> Pn </v-btn>
+              <v-btn depressed> Wt </v-btn>
+              <v-btn depressed> Śr </v-btn>
+              <v-btn depressed> Czw </v-btn>
+              <v-btn depressed> Pt </v-btn>
+              <v-btn depressed> Sb </v-btn>
+              <v-btn depressed v-show="startOnMonday"> Nd </v-btn>
             </v-btn-toggle>
           </v-input>
           <v-checkbox class="tw-mt-2" v-model="startOnMonday" hide-details>
             <template v-slot:label>
               <span class="tw-text-sm tw-text-very-dark-gray">
-                Start on Monday
+                Tydzień zaczyna się w poniedziałek
               </span>
             </template>
           </v-checkbox>
@@ -114,7 +114,7 @@
           @requestContactsAccess="requestContactsAccess"
         >
           <template v-slot:header>
-            <div class="tw-mb-2 tw-text-lg tw-text-black">Members</div>
+            <div class="tw-mb-2 tw-text-lg tw-text-black">Członkowie</div>
           </template>
         </EmailInput>
         <!-- </div> -->
@@ -125,7 +125,7 @@
             block
             text
             @click="showAdvancedOptions = !showAdvancedOptions"
-            ><span class="tw-mr-1">Advanced options</span>
+            ><span class="tw-mr-1">Opcje zaawansowane</span>
             <v-icon :class="`tw-rotate-${showAdvancedOptions ? '180' : '0'}`"
               >mdi-chevron-down</v-icon
             ></v-btn
@@ -133,7 +133,7 @@
           <v-expand-transition>
             <div v-show="showAdvancedOptions">
               <div class="tw-my-2">
-                <TimezoneSelector v-model="timezone" label="Timezone" />
+                <TimezoneSelector v-model="timezone" label="Strefa czasowa" />
               </div>
             </div>
           </v-expand-transition>
@@ -150,13 +150,13 @@
           class="tw-mt-4 tw-bg-green"
           @click="submit"
         >
-          {{ edit ? "Save edits" : "Create group" }}
+          {{ edit ? "Zapisz zmiany" : "Utwórz grupę" }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          Popraw błędy formularza przed kontynuowaniem
         </div>
       </div>
     </v-card-actions>
@@ -228,12 +228,12 @@ export default {
   computed: {
     ...mapState(["authUser"]),
     nameRules() {
-      return [(v) => !!v || "Group name is required"]
+      return [(v) => !!v || "Nazwa grupy jest wymagana"]
     },
     selectedDaysRules() {
       return [
         (selectedDays) =>
-          selectedDays.length > 0 || "Please select at least one day",
+          selectedDays.length > 0 || "Wybierz co najmniej jeden dzień",
       ]
     },
     formEmpty() {
@@ -367,7 +367,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem creating that group! Please try again later."
+              "Nie udało się utworzyć grupy. Spróbuj ponownie później."
             )
             console.error(err)
           })
@@ -401,7 +401,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem editing this group! Please try again later."
+              "Nie udało się edytować grupy. Spróbuj ponownie później."
             )
           })
           .finally(() => {

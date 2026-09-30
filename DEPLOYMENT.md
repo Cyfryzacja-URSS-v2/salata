@@ -20,7 +20,8 @@ cp server/.env.template server/.env
 # Edit server/.env with your values (see Configuration below)
 
 # 3. Build and start services
-docker compose up -d --build
+# --env-file is needed so the frontend build can read CLIENT_ID too.
+docker compose --env-file server/.env up -d --build
 
 # 4. Configure Caddy
 sudo cp Caddyfile.example /etc/caddy/Caddyfile
@@ -51,12 +52,12 @@ Edit `/etc/caddy/Caddyfile` with your domain before reloading.
 ## Commands
 
 ```bash
-docker compose up -d              # Start services
-docker compose logs -f            # View logs
-docker compose logs -f server     # View specific service logs
-docker compose up -d --build      # Rebuild after code changes
-docker compose down               # Stop services
-docker compose down -v            # Stop and remove volumes (deletes data!)
+docker compose --env-file server/.env up -d              # Start services
+docker compose --env-file server/.env logs -f            # View logs
+docker compose --env-file server/.env logs -f server     # View specific service logs
+docker compose --env-file server/.env up -d --build      # Rebuild after code changes
+docker compose --env-file server/.env down               # Stop services
+docker compose --env-file server/.env down -v            # Stop and remove volumes (deletes data!)
 ```
 
 ## Data & Backup
@@ -96,6 +97,15 @@ docker compose exec server ls -la /app/frontend/dist
 ### Required Environment Variables
 
 Create `server/.env` from the template (`server/.env.template`).
+
+Compose loads `server/.env` into the backend through the `server` service. The
+frontend is built separately, so use `--env-file server/.env` when starting or
+rebuilding Compose; this makes `CLIENT_ID` available as a build argument.
+
+`CLIENT_ID` is intentionally embedded in the frontend JavaScript. It is a
+public OAuth identifier and is expected to be visible in the browser. Never
+pass `CLIENT_SECRET`, `SESSION_SECRET`, `ENCRYPTION_KEY`, or other secrets to
+the frontend build.
 
 #### Required
 
@@ -145,11 +155,17 @@ See `server/.env.template` for the complete list.
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. Create a new project or select existing
 3. Enable the following APIs:
-   - Google Calendar API
-   - People API (Contacts)
-   - Admin SDK API (Directory)
+    - Google Calendar API
+    - People API (Contacts)
+    - Admin SDK API (Directory)
 4. Create OAuth 2.0 credentials (Web application type)
 5. Add authorized redirect URIs:
-   - `https://yourdomain.com/api/auth/callback`
-   - `http://localhost:3002/api/auth/callback` (for development)
+    - `https://yourdomain.com/auth`
+    - `http://localhost:3002/auth` (for development)
+    - `http://localhost:8080/auth` (for Vue CLI development)
 6. Copy the Client ID and Client Secret to your `.env`
+
+The redirect URI must exactly match the URL used to open the app, including
+the scheme (`http` or `https`), hostname, port, and `/auth` path. The app
+builds this value from `window.location.origin` and does not use
+`/api/auth/callback`.

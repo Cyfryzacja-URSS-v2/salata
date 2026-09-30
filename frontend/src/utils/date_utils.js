@@ -26,17 +26,19 @@ export const getDateString = (date, utc = false) => {
 
 /** Returns a string in the format "Mon, 9/23, 10 AM - 12 PM PDT" given a start date and end date */
 export const getStartEndDateString = (startDate, endDate) => {
-  const startDay = startDate.toLocaleString("en-US", { weekday: "short" })
-  const startMonth = startDate.toLocaleString("en-US", { month: "short" })
-  const startDayOfMonth = startDate.toLocaleString("en-US", { day: "numeric" })
-  const startTime = startDate.toLocaleString("en-US", {
+  const startDay = startDate.toLocaleString("pl-PL", { weekday: "short" })
+  const startMonth = startDate.toLocaleString("pl-PL", { month: "short" })
+  const startDayOfMonth = startDate.toLocaleString("pl-PL", { day: "numeric" })
+  const startTime = startDate.toLocaleString("pl-PL", {
     hour: "numeric",
     minute: "numeric",
+    hour12: false,
   })
-  const endTime = endDate.toLocaleString("en-US", {
+  const endTime = endDate.toLocaleString("pl-PL", {
     hour: "numeric",
     minute: "numeric",
     timeZoneName: "short",
+    hour12: false,
   })
 
   return `${startDay}, ${startMonth} ${startDayOfMonth}, ${startTime} - ${endTime}`
@@ -76,7 +78,7 @@ export const getDateRangeStringForEvent = (event) => {
   if (event.type === eventTypes.DOW || event.type === eventTypes.GROUP) {
     let s = ""
 
-    const dayAbbreviations = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    const dayAbbreviations = ["Nd", "Pn", "Wt", "Śr", "Czw", "Pt", "Sb"]
     for (let date of event.dates) {
       date = getDateWithTimezone(date)
 
@@ -574,11 +576,9 @@ export const userPrefers12h = () => {
     .hour12
 }
 
-/** Returns an array of time options based on whether user prefers 12h or 24h */
+/** Returns time options, using 24-hour format by default. */
 export const getTimeOptions = () => {
-  const prefers12h = !localStorage["timeType"]
-    ? userPrefers12h()
-    : localStorage["timeType"] === timeTypes.HOUR12
+  const prefers12h = localStorage["timeType"] === timeTypes.HOUR12
 
   const times = []
   if (prefers12h) {

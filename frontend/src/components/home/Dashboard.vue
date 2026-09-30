@@ -5,22 +5,7 @@
         <div
           class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Dashboard
-        </div>
-        <div
-          v-if="!isPremiumUser"
-          class="tw-flex tw-items-baseline tw-gap-2 tw-text-sm tw-font-normal tw-text-very-dark-gray"
-        >
-          <div>
-            {{ authUser?.numEventsCreated }} / {{ numFreeEvents }} free events
-            created this month
-          </div>
-          <div
-            class="tw-cursor-pointer tw-select-none tw-text-xs tw-font-medium tw-text-green tw-underline"
-            @click="openUpgradeDialog"
-          >
-            Upgrade
-          </div>
+          Panel
         </div>
       </div>
       <v-btn
@@ -29,7 +14,7 @@
         class="tw-text-very-dark-gray"
       >
         <v-icon class="tw-text-lg">mdi-folder-plus</v-icon>
-        <span class="tw-ml-2">New folder</span>
+        <span class="tw-ml-2">Utwórz folder</span>
       </v-btn>
     </div>
 
@@ -69,11 +54,11 @@
               </template>
               <v-list dense class="tw-py-1">
                 <v-list-item @click.stop.prevent="openEditFolderDialog(folder)">
-                  <v-list-item-title>Edit</v-list-item-title>
+                  <v-list-item-title>Edytuj</v-list-item-title>
                 </v-list-item>
                 <v-list-item @click.stop.prevent="openDeleteDialog(folder)">
                   <v-list-item-title class="tw-text-red"
-                    >Delete</v-list-item-title
+                    >Usuń</v-list-item-title
                   >
                 </v-list-item>
               </v-list>
@@ -147,21 +132,21 @@
 
       <div v-if="allEvents.length === 0">
         <div class="tw-py-4 tw-text-sm tw-text-very-dark-gray">
-          No events yet! Create one to get started.
+          Brak wydarzeń. Utwórz nowe wydarzenie, aby rozpocząć.
         </div>
       </div>
     </div>
     <v-dialog v-model="deleteDialog" max-width="400">
       <v-card>
-        <v-card-title>Delete "{{ folderToDelete.name }}"?</v-card-title>
+        <v-card-title>Usuń "{{ folderToDelete.name }}"?</v-card-title>
         <v-card-text
-          >Are you sure you want to delete this folder? All events you own in
-          this folder will be deleted as well.</v-card-text
+          >Czy na pewno chcesz usunąć ten folder? Wszystkie wydarzenia, które
+          posiadasz w tym folderze, zostaną również usunięte.</v-card-text
         >
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="deleteDialog = false">Cancel</v-btn>
-          <v-btn color="red darken-1" text @click="confirmDelete">Delete</v-btn>
+          <v-btn text @click="deleteDialog = false">Anuluj</v-btn>
+          <v-btn color="red darken-1" text @click="confirmDelete">Usuń</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -171,14 +156,14 @@
         <v-card-text>
           <v-text-field
             v-model="newFolderName"
-            label="Folder name"
-            placeholder="Untitled folder"
+            label="Nazwa folderu"
+            placeholder="Brak nazwy folderu"
             autofocus
             @keydown.enter="confirmFolderDialog"
             hide-details
           ></v-text-field>
           <div class="tw-mt-4">
-            <span class="tw-text-gray-500 tw-text-sm">Color</span>
+            <span class="tw-text-gray-500 tw-text-sm">Kolor</span>
             <div class="tw-mt-2 tw-flex tw-gap-x-3">
               <div
                 v-for="color in folderColors"
@@ -196,7 +181,7 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text @click="closeFolderDialog">Cancel</v-btn>
+          <v-btn text @click="closeFolderDialog">Anuluj</v-btn>
           <v-btn color="primary" text @click="confirmFolderDialog">{{
             folderDialogConfirmText
           }}</v-btn>
@@ -319,10 +304,10 @@ export default {
       return eventsByFolder
     },
     folderDialogTitle() {
-      return this.isEditingFolder ? "Edit folder" : "New folder"
+            return this.isEditingFolder ? "Edytuj folder" : "Nowy folder"
     },
     folderDialogConfirmText() {
-      return this.isEditingFolder ? "Save" : "Create"
+      return this.isEditingFolder ? "Zapisz" : "Utwórz"
     },
     allFolders() {
       const folders = this.folders.map((folder) => ({
@@ -330,7 +315,7 @@ export default {
         id: folder._id,
         type: "regular",
         name: folder.name,
-        emptyMessage: "No events in this folder",
+        emptyMessage: "Brak wydarzeń w tym folderze",
       }))
 
       // Only show "no-folder" section if there are events
@@ -338,8 +323,8 @@ export default {
         folders.push({
           id: "no-folder",
           type: "no-folder",
-          name: "No folder",
-          emptyMessage: "No events",
+          name: "Bez folderu",
+          emptyMessage: "Brak wydarzeń",
         })
       }
 
@@ -348,8 +333,8 @@ export default {
         folders.push({
           id: "archived",
           type: "archived",
-          name: "Archived",
-          emptyMessage: "No archived events",
+          name: "Archiwum",
+          emptyMessage: "Brak zarchiwizowanych wydarzeń",
         })
       }
 

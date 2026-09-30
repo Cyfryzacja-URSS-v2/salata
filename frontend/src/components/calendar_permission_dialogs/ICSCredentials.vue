@@ -2,21 +2,21 @@
   <div class="tw-flex tw-flex-col tw-gap-6">
     <div class="tw-flex tw-flex-col tw-gap-3">
       <div class="tw-text-md tw-flex tw-flex-row tw-items-center tw-justify-start tw-gap-2 tw-font-medium">
-        Connect an ICS calendar feed
+        Połącz kanał kalendarza ICS
       </div>
       <div class="tw-flex tw-flex-col tw-gap-2">
         <div class="tw-text-sm tw-text-very-dark-gray">
-          Paste the ICS feed URL from your calendar provider. This is usually found in your calendar's sharing or export settings.
+          Wklej adres kanału ICS od dostawcy kalendarza. Zwykle znajdziesz go w ustawieniach udostępniania lub eksportu kalendarza.
         </div>
       </div>
     </div>
     <div class="tw-flex tw-flex-col tw-gap-3">
-      <v-text-field solo placeholder="Feed URL" v-model="feedUrl" hide-details="auto" :error-messages="feedUrlError" />
-      <v-text-field solo placeholder="Label" hide-details v-model="label" />
+      <v-text-field solo placeholder="Adres kanału" v-model="feedUrl" hide-details="auto" :error-messages="feedUrlError" />
+      <v-text-field solo placeholder="Nazwa" hide-details v-model="label" />
       <div class="tw-flex tw-items-center tw-gap-2">
-        <v-btn text class="tw-grow" @click="$emit('back')">Back</v-btn>
+        <v-btn text class="tw-grow" @click="$emit('back')">Wstecz</v-btn>
         <v-btn :disabled="!enableSubmit" color="primary" class="tw-grow" :loading="loading"
-          @click="submit">Submit</v-btn>
+          @click="submit">Dodaj</v-btn>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@ export default {
     },
     feedUrlError() {
       if (!this.feedUrl || this.feedUrl.length === 0) return ""
-      if (!urlRegex.test(this.feedUrl)) return "Please enter a valid URL"
+      if (!urlRegex.test(this.feedUrl)) return "Wpisz prawidłowy adres URL"
       return ""
     },
   },
@@ -65,7 +65,7 @@ export default {
         })
         .catch((err) => {
           this.showError(
-            "An error occurred while adding your ICS Calendar! Please check your feed URL or try again later."
+            "Nie udało się dodać kalendarza ICS. Sprawdź adres kanału lub spróbuj ponownie później."
           )
           console.error(err)
         })

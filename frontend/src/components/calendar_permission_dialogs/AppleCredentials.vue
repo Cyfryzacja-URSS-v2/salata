@@ -4,7 +4,7 @@
       <div
         class="tw-text-md tw-flex tw-flex-row tw-items-center tw-justify-start tw-gap-2 tw-font-medium"
       >
-        Connect your
+        Połącz swój
         <div class="tw-flex tw-items-center tw-gap-1">
           <v-img
             class="-tw-mt-1 tw-flex-initial"
@@ -17,20 +17,20 @@
       </div>
       <div class="tw-flex tw-flex-col tw-gap-2">
         <div class="tw-text-sm tw-text-very-dark-gray">
-          Generate an
+          Wygeneruj
           <span class="tw-font-medium tw-text-black"
-            >app-specific password</span
+            >hasło do aplikacji</span
           >
-          to use with Timeful at
+          do użycia z aplikacją Sałata na stronie
           <a
             href="https://appleid.apple.com/account/manage"
             target="_blank"
             rel="noopener noreferrer"
             >https://appleid.apple.com/account/manage</a
-          >. Copy and paste the generated app password below.
+          >. Skopiuj wygenerowane hasło i wklej je poniżej.
         </div>
         <div class="tw-text-sm tw-text-very-dark-gray">
-          Your credentials will be stored and encrypted.
+          Dane logowania zostaną zapisane i zaszyfrowane.
         </div>
       </div>
     </div>
@@ -38,20 +38,20 @@
       <v-text-field solo placeholder="Apple ID" hide-details v-model="email" />
       <v-text-field
         solo
-        placeholder="App password"
+        placeholder="Hasło do aplikacji"
         hide-details
         v-model="password"
         type="password"
       />
       <div class="tw-flex tw-items-center tw-gap-2">
-        <v-btn text class="tw-grow" @click="$emit('back')">Back</v-btn>
+        <v-btn text class="tw-grow" @click="$emit('back')">Wstecz</v-btn>
         <v-btn
           :disabled="!enableSubmit"
           color="primary"
           class="tw-grow"
           :loading="loading"
           @click="submit"
-          >Submit</v-btn
+          >Dodaj</v-btn
         >
       </div>
     </div>
@@ -96,10 +96,10 @@ export default {
         })
         .catch((err) => {
           if (err.error === errors.InvalidCredentials) {
-            this.showError("Your Apple ID or app password is incorrect.")
+            this.showError("Apple ID lub hasło do aplikacji jest nieprawidłowe.")
           } else {
             this.showError(
-              "An error occurred while adding your Apple Calendar! Please try again later."
+              "Nie udało się dodać Kalendarza Apple. Spróbuj ponownie później."
             )
           }
         })

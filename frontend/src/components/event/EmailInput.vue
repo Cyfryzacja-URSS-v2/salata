@@ -9,7 +9,7 @@
       item-text="queryString"
       item-value="queryString"
       class="tw-mt-2 tw-text-sm"
-      placeholder="Type an email address and press enter..."
+      placeholder="Wpisz adres e-mail i naciśnij Enter..."
       multiple
       append-icon=""
       solo
@@ -46,9 +46,9 @@
       <v-expand-transition>
         <div class="tw-text-xs tw-text-dark-gray" v-if="!hasContactsAccess">
           <a class="tw-underline" @click="requestContactsAccess"
-            >Enable contacts access</a
+            >Włącz dostęp do kontaktów</a
           >
-          for email auto-suggestions.
+          , aby otrzymywać podpowiedzi adresów e-mail.
         </div>
       </v-expand-transition>
     </div>

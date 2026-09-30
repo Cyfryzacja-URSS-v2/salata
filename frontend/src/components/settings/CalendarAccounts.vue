@@ -61,11 +61,12 @@
                   "
                   v-bind="attrs"
                   v-on="on"
-                  >+ Add calendar</v-btn
+                  >+ Dodaj kalendarz</v-btn
                 >
                 <p class="tw-mb-0 tw-mt-1 tw-text-xs tw-text-dark-gray">
-                  Only your available times are shared with respondents. Your
-                  personal event details are never shared.
+                  Tylko Twoja zazanaczona dostępność jest udostępniana innym.
+                  Szczegóły Twoich osobistych wydarzeń nigdy nie są
+                  udostępniane.
                 </p>
               </div>
             </template>
@@ -81,15 +82,15 @@
     </v-expand-transition>
     <v-dialog v-model="removeDialog" width="500" persistent>
       <v-card>
-        <v-card-title>Are you sure?</v-card-title>
+        <v-card-title>Czy na pewno?</v-card-title>
         <v-card-text class="tw-text-sm tw-text-dark-gray"
-          >Are you sure you want to remove
+          >Czy na pewno chcesz usunąć
           {{ removePayload.email }}?</v-card-text
         >
         <v-card-actions>
           <v-spacer />
-          <v-btn text @click="removeDialog = false">Cancel</v-btn>
-          <v-btn text color="error" @click="removeAccount">Remove</v-btn>
+          <v-btn text @click="removeDialog = false">Anuluj</v-btn>
+          <v-btn text color="error" @click="removeAccount">Usuń</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -200,7 +201,7 @@ export default {
         .catch((err) => {
           console.error(err)
           this.showError(
-            "There was a problem removing this account! Please try again later."
+            "Nie udało się usunąć tego konta. Spróbuj ponownie później."
           )
         })
     },

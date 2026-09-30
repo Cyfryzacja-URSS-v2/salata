@@ -7,7 +7,7 @@
   >
     <v-card>
       <v-card-title class="tw-flex">
-        <div>Continue as guest</div>
+        <div>Kontynuuj jako gość</div>
         <v-spacer />
         <v-btn icon @click="$emit('input', false)">
           <v-icon>mdi-close</v-icon>
@@ -25,7 +25,7 @@
             v-model="name"
             @keyup.enter="submit"
             :rules="nameRules"
-            placeholder="Enter your name..."
+            placeholder="Wpisz swoje imię i nazwisko..."
             autofocus
             hide-details="auto"
             autocomplete="off"
@@ -36,8 +36,8 @@
             v-model="email"
             @keyup.enter="submit"
             :rules="emailRules"
-            placeholder="Enter your email..."
-            hint="The event creator has requested your email. It will only be visible to them."
+            placeholder="Wpisz adres e-mail..."
+            hint="Twórca wydarzenia poprosił o Twój adres e-mail. Będzie widoczny tylko dla niego."
             persistent-hint
             solo
           ></v-text-field>
@@ -49,7 +49,7 @@
               :dark="formValid"
               :disabled="!formValid"
             >
-              Continue
+              Kontynuuj
             </v-btn>
           </div>
         </v-form>
@@ -92,12 +92,12 @@ export default {
     submit() {
       // Set rules only on submit
       this.nameRules = [
-        (name) => !!name || "Name is required",
-        (name) => !this.respondents.includes(name) || "Name already taken",
+        (name) => !!name || "Imię i nazwisko są wymagane",
+        (name) => !this.respondents.includes(name) || "Ta nazwa jest już zajęta",
       ]
       this.emailRules = [
-        (email) => !!email || "Email is required",
-        (email) => !!validateEmail(email) || "Invalid email",
+        (email) => !!email || "Adres e-mail jest wymagany",
+        (email) => !!validateEmail(email) || "Nieprawidłowy adres e-mail",
       ]
 
       this.$nextTick(() => {

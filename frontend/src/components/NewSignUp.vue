@@ -7,13 +7,13 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit sign up" : "New sign up" }}
+          {{ edit ? "Edytuj zapisy" : "Nowe zapisy" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
         >
-          Ideal for events with sign up slots
+          Idealne do wydarzeń z zapisami na miejsca
         </div>
       </div>
       <v-spacer />
@@ -25,10 +25,10 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Events</template>
+          <template v-slot:header>Wydarzenia</template>
           <div class="tw-mb-4">
-            Use events to collect people's availabilities and compare them
-            across certain days.
+            Używaj wydarzeń, aby zbierać dostępność osób i porównywać ją w
+            wybranych dniach.
           </div>
         </HelpDialog>
       </template>
@@ -47,7 +47,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your event..."
+          placeholder="Nazwij wydarzenie..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -66,7 +66,7 @@
           <v-expand-transition>
             <div v-if="!daysOnly">
               <div class="tw-mb-2 tw-text-lg tw-text-black">
-                What times might work?
+                Jakie godziny mogą pasować?
               </div>
               <div
                 class="tw-mb-6 tw-flex tw-items-baseline tw-justify-center tw-space-x-2"
@@ -95,7 +95,7 @@
           </v-expand-transition>
 
           <div class="tw-mb-2 tw-text-lg tw-text-black">
-            What
+            Jakie
             {{ selectedDateOption === dateOptions.SPECIFIC ? "dates" : "days" }}
             might work?
           </div>
@@ -111,7 +111,7 @@
           <v-expand-transition>
             <div v-if="selectedDateOption === dateOptions.SPECIFIC || daysOnly">
               <div class="tw-mb-2 tw-text-xs tw-text-dark-gray">
-                Drag to select multiple dates
+                Przeciągnij, aby wybrać wiele dat
               </div>
               <v-input
                 v-model="selectedDays"
@@ -139,20 +139,20 @@
                   solo
                   color="primary"
                 >
-                  <v-btn depressed v-show="!startOnMonday"> Sun </v-btn>
-                  <v-btn depressed> Mon </v-btn>
-                  <v-btn depressed> Tue </v-btn>
-                  <v-btn depressed> Wed </v-btn>
-                  <v-btn depressed> Thu </v-btn>
-                  <v-btn depressed> Fri </v-btn>
-                  <v-btn depressed> Sat </v-btn>
-                  <v-btn depressed v-show="startOnMonday"> Sun </v-btn>
+                  <v-btn depressed v-show="!startOnMonday"> Nd </v-btn>
+                  <v-btn depressed> Pn </v-btn>
+                  <v-btn depressed> Wt </v-btn>
+                  <v-btn depressed> Śr </v-btn>
+                  <v-btn depressed> Czw </v-btn>
+                  <v-btn depressed> Pt </v-btn>
+                  <v-btn depressed> Sb </v-btn>
+                  <v-btn depressed v-show="startOnMonday"> Nd </v-btn>
                 </v-btn-toggle>
               </v-input>
               <v-checkbox class="tw-mt-2" v-model="startOnMonday" hide-details>
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-very-dark-gray">
-                    Start on Monday
+                    Tydzień zaczyna się w poniedziałek
                   </span>
                 </template>
               </v-checkbox>
@@ -160,10 +160,10 @@
           </v-expand-transition>
         </div>
 
-        <v-checkbox v-model="notificationsEnabled" hide-details class="tw-mt-2">
+        <v-checkbox v-if="false" v-model="notificationsEnabled" hide-details class="tw-mt-2">
           <template v-slot:label>
             <span class="tw-text-sm tw-text-very-dark-gray"
-              >Email me each time someone signs up</span
+              >Wyślij mi e-mail za każdym razem, gdy ktoś się zapisze</span
             >
           </template>
         </v-checkbox>
@@ -171,7 +171,7 @@
         <v-checkbox v-model="collectEmails">
           <template v-slot:label>
             <span class="tw-text-sm tw-text-very-dark-gray">
-              Collect email address on sign up
+              Zbieraj adresy e-mail podczas zapisów
             </span>
           </template>
         </v-checkbox>
@@ -180,6 +180,7 @@
           <!-- <ExpandableSection
             v-if="authUser"
             label="Email reminders"
+            v-if="false"
             v-model="showEmailReminders"
             :auto-scroll="dialog"
           >
@@ -195,7 +196,7 @@
                 <template v-slot:header>
                   <div class="tw-flex tw-gap-1">
                     <div class="tw-text-very-dark-gray">
-                      Remind people to fill out the event
+                      Przypominaj osobom o uzupełnieniu wydarzenia
                     </div>
 
                     <v-tooltip
@@ -222,18 +223,18 @@
 
           <ExpandableSection
             v-model="showAdvancedOptions"
-            label="Advanced options"
+            label="Opcje zaawansowane"
             :auto-scroll="dialog"
           >
             <div class="tw-flex tw-flex-col tw-gap-5 tw-pt-2">
               <v-checkbox
                 v-if="authUser"
                 v-model="blindAvailabilityEnabled"
-                messages="Only show attendees to sign up creator"
+                messages="Pokazuj uczestników tylko twórcy zapisów"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-black">
-                    Hide attendees from each other
+                    Ukryj uczestników przed sobą
                   </span>
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -247,12 +248,12 @@
               <v-checkbox
                 v-else
                 disabled
-                messages="Only show responses to event creator. "
+                messages="Pokazuj odpowiedzi tylko twórcy wydarzenia. "
                 off-icon="mdi-checkbox-blank-off-outline"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm"
-                    >Hide responses from respondents</span
+                    >Ukryj odpowiedzi przed uczestnikami</span
                   >
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -261,8 +262,7 @@
                   >
                     {{ message }}
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">Zaloguj się</a>, aby użyć tej funkcji
                     </span>
                   </div>
                 </template>
@@ -314,13 +314,13 @@
           class="tw-mt-4 tw-bg-green"
           @click="submit"
         >
-          {{ edit ? "Save edits" : "Create event" }}
+          {{ edit ? "Zapisz zmiany" : "Utwórz wydarzenie" }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          Popraw błędy formularza przed kontynuowaniem
         </div>
       </div>
     </v-card-actions>
@@ -405,16 +405,16 @@ export default {
 
     daysOnly: false,
     daysOnlyOptions: Object.freeze([
-      { text: "Dates and times", value: false },
-      { text: "Dates only", value: true },
+      { text: "Daty i godziny", value: false },
+      { text: "Tylko daty", value: true },
     ]),
 
     // Date options
     dateOptions: Object.freeze({
-      SPECIFIC: "Specific dates",
-      DOW: "Days of the week",
+      SPECIFIC: "Konkretne daty",
+      DOW: "Dni tygodnia",
     }),
-    selectedDateOption: "Specific dates",
+    selectedDateOption: "Konkretne daty",
 
     // Email reminders
     showEmailReminders: false,
@@ -510,7 +510,7 @@ export default {
       this.selectedDaysOfWeek = []
       this.notificationsEnabled = false
       this.daysOnly = false
-      this.selectedDateOption = "Specific dates"
+      this.selectedDateOption = "Konkretne daty"
       this.emails = []
       this.showAdvancedOptions = false
       this.blindAvailabilityEnabled = false
@@ -578,10 +578,10 @@ export default {
         name: this.name,
         duration: duration,
         dates: dates,
-        notificationsEnabled: this.notificationsEnabled,
+        notificationsEnabled: false,
         blindAvailabilityEnabled: this.blindAvailabilityEnabled,
         daysOnly: this.daysOnly,
-        remindees: this.emails,
+        remindees: [],
         type: type,
         isSignUpForm: true,
         sendEmailAfterXResponses: this.sendEmailAfterXResponsesEnabled
@@ -595,10 +595,10 @@ export default {
         eventName: this.name,
         eventDuration: duration,
         eventDates: JSON.stringify(dates),
-        eventNotificationsEnabled: this.notificationsEnabled,
+        eventNotificationsEnabled: false,
         eventBlindAvailabilityEnabled: this.blindAvailabilityEnabled,
         eventDaysOnly: this.daysOnly,
-        eventRemindees: this.emails,
+        eventRemindees: [],
         eventType: type,
         eventIsSignUpForm: true,
         eventSendEmailAfterXResponses: this.sendEmailAfterXResponsesEnabled
@@ -629,7 +629,7 @@ export default {
           })
           .catch((err) => {
             this.showError(
-              "There was a problem creating that event! Please try again later."
+              "Nie udało się utworzyć wydarzenia. Spróbuj ponownie później."
             )
           })
           .finally(() => {
@@ -649,7 +649,7 @@ export default {
             })
             .catch((err) => {
               this.showError(
-                "There was a problem editing this event! Please try again later."
+                "Nie udało się edytować wydarzenia. Spróbuj ponownie później."
               )
             })
             .finally(() => {
@@ -681,7 +681,7 @@ export default {
         selectedDays: this.selectedDays,
         selectedDaysOfWeek: this.selectedDaysOfWeek,
         selectedDateOption: this.selectedDateOption,
-        notificationsEnabled: this.notificationsEnabled,
+        notificationsEnabled: false,
         timezone: this.timezone,
       }
       signInGoogle({
@@ -779,7 +779,7 @@ export default {
         emails: [...this.emails],
         blindAvailabilityEnabled: this.blindAvailabilityEnabled,
         sendEmailAfterXResponsesEnabled: this.sendEmailAfterXResponsesEnabled,
-        sendEmailAfterXResponses: this.sendEmailAfterXResponses,
+        sendEmailAfterXResponses: -1,
       }
     },
     hasEventBeenEdited() {

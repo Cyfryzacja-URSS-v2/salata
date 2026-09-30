@@ -14,9 +14,9 @@
           <div
             class="tw-mb-5 tw-text-wrap tw-text-xl tw-font-medium tw-text-black"
           >
-            <template v-if="isOwner"> Share calendar availability </template>
+            <template v-if="isOwner"> Udostępnij dostępność kalendarza </template>
             <template v-else>
-              Accept invitation to share your calendar availability with "{{
+              Zaakceptuj zaproszenie do udostępniania dostępności kalendarza z „{{
                 group.name
               }}"?
             </template>
@@ -34,7 +34,7 @@
 
               <div class="tw-mt-5 tw-space-y-4">
                 <div class="tw-font-medium tw-text-black">
-                  Your calendar availability from these calendars will be shared
+                  Twoja dostępność z tych kalendarzy zostanie udostępniona
                   with:
                 </div>
                 <div
@@ -48,10 +48,10 @@
                   ></UserChip>
                 </div>
                 <div v-else class="tw-flex tw-items-center tw-italic">
-                  <div>No members added yet</div>
+                  <div>Nie dodano jeszcze członków</div>
                 </div>
                 <div class="tw-text-xs tw-text-dark-gray">
-                  Your calendar events will NOT be visible to others
+                  Twoje wydarzenia z kalendarza NIE będą widoczne dla innych
                 </div>
               </div>
             </div>
@@ -73,27 +73,27 @@
         </v-card-text>
 
         <v-card-actions v-if="isOwner">
-          <v-btn class="tw-px-6" @click="goHome" text>Back</v-btn>
+          <v-btn class="tw-px-6" @click="goHome" text>Wstecz</v-btn>
           <v-spacer />
           <v-btn
             color="primary"
             @click="acceptInvitation"
             :disabled="!calendarPermissionGranted"
             class="tw-px-6"
-            >Share</v-btn
+            >Udostępnij</v-btn
           >
         </v-card-actions>
         <v-card-actions v-else>
           <v-dialog v-model="rejectDialog" width="400" persistent>
             <template v-slot:activator="{ on, attrs }">
               <v-btn text class="tw-text-dark-gray" v-bind="attrs" v-on="on"
-                >Reject invitation</v-btn
+                >Odrzuć zaproszenie</v-btn
               >
             </template>
             <v-card>
-              <v-card-title>Are you sure?</v-card-title>
+              <v-card-title>Czy na pewno?</v-card-title>
               <v-card-text
-                >Are you sure you want to reject this invite?</v-card-text
+                >Czy na pewno chcesz odrzucić to zaproszenie?</v-card-text
               >
               <v-card-actions>
                 <v-spacer />
@@ -101,10 +101,10 @@
                   text
                   class="tw-text-dark-gray"
                   @click="rejectDialog = false"
-                  >Cancel</v-btn
+                  >Anuluj</v-btn
                 >
                 <v-btn text @click="rejectInvitation" color="error"
-                  >I'm sure</v-btn
+                  >Tak, odrzuć</v-btn
                 >
               </v-card-actions>
             </v-card>
@@ -114,7 +114,7 @@
             class="tw-bg-green tw-px-5 tw-text-white tw-transition-opacity"
             @click="acceptInvitation"
             :disabled="!calendarPermissionGranted"
-            >Accept Invitation</v-btn
+            >Akceptuj zaproszenie</v-btn
           >
         </v-card-actions>
       </v-card>

@@ -193,13 +193,13 @@
                     "
                     class="tw-z-10 tw-flex tw-h-14 tw-items-center tw-bg-white sm:tw-top-16"
                   >
-                    <template v-for="(day, i) in days">
+                    <template v-for="(day, i) in days" :key="i">
                       <div
                         v-if="!day.isConsecutive"
                         :style="{ width: `${SPLIT_GAP_WIDTH}px` }"
                         :key="`${i}-gap`"
                       ></div>
-                      <div :key="i" class="tw-flex-1 tw-bg-white">
+                      <div class="tw-flex-1 tw-bg-white">
                         <div class="tw-text-center">
                           <div
                             v-if="isSpecificDates || isGroup"
@@ -235,14 +235,13 @@
                           />
                         </div>
 
-                        <template v-for="(day, d) in days">
+                        <template v-for="(day, d) in days" :key="d">
                           <div
                             v-if="!day.isConsecutive"
                             :style="{ width: `${SPLIT_GAP_WIDTH}px` }"
                             :key="`${d}-gap`"
                           ></div>
                           <div
-                            :key="d"
                             class="tw-relative tw-flex-1"
                             :class="
                               ((isGroup && loadingCalendarEvents) ||
@@ -319,10 +318,10 @@
                               v-for="calendarEvent in calendarEventsByDay[
                                 d + page * maxDaysPerPage
                               ]"
+                              :key="calendarEvent.id"
                             >
                               <CalendarEventBlock
                                 :blockStyle="getTimeBlockStyle(calendarEvent)"
-                                :key="calendarEvent.id"
                                 :calendarEvent="calendarEvent"
                                 :isGroup="isGroup"
                                 :isEditingAvailability="
@@ -485,8 +484,8 @@
                     "
                   >
                     <div class="tw-mt-2 tw-text-sm tw-text-dark-gray">
-                      Note: There's no time when all
-                      {{ respondents.length }} respondents are available.
+                      Uwaga: nie ma terminu, w którym wszyscy
+                      respondenci ({{ respondents.length }}) są dostępni.
                     </div>
                   </div>
                 </v-expand-transition>
@@ -542,19 +541,19 @@
           >
             <!-- Show section on the right depending on some if conditions -->
             <template v-if="isSignUp">
-              <div class="tw-mb-2 tw-text-lg tw-text-black">Slots</div>
+              <div class="tw-mb-2 tw-text-lg tw-text-black">Miejsca</div>
               <div v-if="!isOwner" class="tw-mb-3 tw-flex tw-flex-col">
                 <div
                   class="tw-flex tw-flex-col tw-gap-1 tw-rounded-md tw-bg-light-gray tw-p-3 tw-text-xs tw-italic tw-text-dark-gray"
                 >
                   <div v-if="!authUser || alreadyRespondedToSignUpForm">
                     <a class="tw-underline" :href="`mailto:${event.ownerId}`"
-                      >Contact sign up creator</a
+                      >Skontaktuj się z twórcą zapisów</a
                     >
-                    to edit your slot
+                    , aby edytować swoje miejsce
                   </div>
                   <div v-if="event.blindAvailabilityEnabled">
-                    Responses are only visible to creator
+                    Odpowiedzi są widoczne tylko dla twórcy
                   </div>
                 </div>
               </div>
@@ -596,10 +595,10 @@
                   {{
                     (userHasResponded && !addingAvailabilityAsGuest) ||
                     curGuestId
-                      ? "Editing"
-                      : "Adding"
+                      ? "Edytowanie"
+                      : "Dodawanie"
                   }}
-                  availability as
+                  dostępności jako
                   <div
                     v-if="curGuestId && canEditGuestName"
                     class="tw-group tw-mt-0.5 tw-flex tw-w-fit tw-cursor-pointer tw-items-center tw-gap-1"
@@ -616,7 +615,7 @@
                         ? `${authUser.firstName} ${authUser.lastName}`
                         : curGuestId?.length > 0
                         ? curGuestId
-                        : "a guest"
+                        : "gość"
                     }}
                   </span>
                   <v-dialog
@@ -625,11 +624,11 @@
                     content-class="tw-m-0"
                   >
                     <v-card>
-                      <v-card-title>Edit guest name</v-card-title>
+                      <v-card-title>Edytuj nazwę gościa</v-card-title>
                       <v-card-text>
                         <v-text-field
                           v-model="newGuestName"
-                          label="Guest name"
+                          label="Nazwa gościa"
                           autofocus
                           @keydown.enter="saveGuestName"
                           hide-details
@@ -638,10 +637,10 @@
                       <v-card-actions>
                         <v-spacer />
                         <v-btn text @click="editGuestNameDialog = false"
-                          >Cancel</v-btn
+                          >Anuluj</v-btn
                         >
                         <v-btn text color="primary" @click="saveGuestName"
-                          >Save</v-btn
+                          >Zapisz</v-btn
                         >
                       </v-card-actions>
                     </v-card>
@@ -684,13 +683,13 @@
                   >
                     <template v-slot:label>
                       <div class="tw-text-sm tw-text-black">
-                        Overlay availabilities
+                        Nakładaj dostępności
                       </div>
                     </template>
                   </v-switch>
 
                   <div class="tw-mt-2 tw-text-xs tw-text-dark-gray">
-                    View everyone's availability while inputting your own
+                    Wyświetlaj dostępność wszystkich podczas wprowadzania własnej
                   </div>
                 </div>
 
@@ -700,7 +699,7 @@
                   ref="optionsSection"
                 >
                   <ExpandableSection
-                    label="Options"
+                    label="Opcje"
                     :value="showEditOptions"
                     @input="toggleShowEditOptions"
                   >
@@ -717,13 +716,13 @@
                             v-on="on"
                             v-bind="attrs"
                           >
-                            Calendar options...
+                            Opcje kalendarza...
                           </v-btn>
                         </template>
 
                         <v-card>
                           <v-card-title class="tw-flex">
-                            <div>Calendar options</div>
+                            <div>Opcje kalendarza</div>
                             <v-spacer />
                             <v-btn icon @click="calendarOptionsDialog = false">
                               <v-icon>mdi-close</v-icon>
@@ -733,8 +732,8 @@
                             class="tw-flex tw-flex-col tw-gap-6 tw-pb-8 tw-pt-2"
                           >
                             <AlertText v-if="isGroup" class="-tw-mb-4">
-                              Calendar options will only updated for the current
-                              group
+                              Opcje kalendarza zostaną zaktualizowane tylko dla
+                              bieżącej grupy
                             </AlertText>
 
                             <BufferTimeSwitch
@@ -772,24 +771,24 @@
                         v-on="on"
                         class="tw-cursor-pointer tw-text-sm tw-text-red"
                       >
-                        {{ !isGroup ? "Delete availability" : "Leave group" }}
+                        {{ !isGroup ? "Usuń dostępność" : "Opuść grupę" }}
                       </span>
                     </template>
 
                     <v-card>
-                      <v-card-title>Are you sure?</v-card-title>
+                      <v-card-title>Czy na pewno?</v-card-title>
                       <v-card-text class="tw-text-sm tw-text-dark-gray"
-                        >Are you sure you want to
+                        >Czy na pewno chcesz
                         {{
                           !isGroup
-                            ? "delete your availability from this event?"
-                            : "leave this group?"
+                            ? "usunąć swoją dostępność z tego wydarzenia?"
+                            : "opuścić tę grupę?"
                         }}</v-card-text
                       >
                       <v-card-actions>
                         <v-spacer />
                         <v-btn text @click="deleteAvailabilityDialog = false"
-                          >Cancel</v-btn
+                          >Anuluj</v-btn
                         >
                         <v-btn
                           text
@@ -798,7 +797,7 @@
                             $emit('deleteAvailability')
                             deleteAvailabilityDialog = false
                           "
-                          >{{ !isGroup ? "Delete" : "Leave" }}</v-btn
+                          >{{ !isGroup ? "Usuń" : "Opuść" }}</v-btn
                         >
                       </v-card-actions>
                     </v-card>
@@ -1231,18 +1230,18 @@ export default {
 
       /** Constants */
       months: [
-        "jan",
-        "feb",
-        "mar",
-        "apr",
-        "may",
-        "jun",
-        "jul",
-        "aug",
-        "sep",
-        "oct",
-        "nov",
-        "dec",
+        "styczeń",
+        "luty",
+        "marzec",
+        "kwiecień",
+        "maj",
+        "czerwiec",
+        "lipiec",
+        "sierpień",
+        "wrzesień",
+        "październik",
+        "listopad",
+        "grudzień",
       ],
     }
   },
@@ -1264,11 +1263,11 @@ export default {
     /** Returns the days of the week in the correct order */
     daysOfWeek() {
       if (!this.event.daysOnly) {
-        return ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
+        return ["nd", "pn", "wt", "śr", "czw", "pt", "sob"]
       }
       return !this.startCalendarOnMonday
-        ? ["sun", "mon", "tue", "wed", "thu", "fri", "sat"]
-        : ["mon", "tue", "wed", "thu", "fri", "sat", "sun"]
+        ? ["nd", "pn", "wt", "śr", "czw", "pt", "sob"]
+        : ["pn", "wt", "śr", "czw", "pt", "sob", "nd"]
     },
     /** Only allow scheduling when a curScheduledEvent exists */
     allowScheduleEvent() {
@@ -2070,13 +2069,13 @@ export default {
           case this.isGroup && this.states.EDIT_AVAILABILITY:
             return "Toggle which calendars are used. Tap and drag to edit your availability."
           case this.states.EDIT_AVAILABILITY:
-            const daysOrTimes = this.event.daysOnly ? "days" : "times"
+            const daysOrTimes = this.event.daysOnly ? "dni" : "godziny"
             if (this.availabilityType === availabilityTypes.IF_NEEDED) {
-              return `Tap and drag to add your "if needed" ${daysOrTimes} in yellow.`
+              return `Dotknij i przeciągnij, aby dodać ${daysOrTimes} „w razie potrzeby” oznaczone na żółto.`
             }
-            return `Tap and drag to add your "available" ${daysOrTimes} in green.`
+            return `Dotknij i przeciągnij, aby dodać dostępne ${daysOrTimes} oznaczone na zielono.`
           case this.states.SCHEDULE_EVENT:
-            return "Tap and drag on the calendar to schedule a Google Calendar event during those times."
+            return "Dotknij i przeciągnij po kalendarzu, aby zaplanować wydarzenie w Kalendarzu Google w tych godzinach."
           default:
             return ""
         }
@@ -2086,13 +2085,13 @@ export default {
         case this.isGroup && this.states.EDIT_AVAILABILITY:
           return "Toggle which calendars are used. Click and drag to edit your availability."
         case this.states.EDIT_AVAILABILITY:
-          const daysOrTimes = this.event.daysOnly ? "days" : "times"
+          const daysOrTimes = this.event.daysOnly ? "dni" : "godziny"
           if (this.availabilityType === availabilityTypes.IF_NEEDED) {
-            return `Click and drag to add your "if needed" ${daysOrTimes} in yellow.`
+            return `Kliknij i przeciągnij, aby dodać ${daysOrTimes} „w razie potrzeby” oznaczone na żółto.`
           }
-          return `Click and drag to add your "available" ${daysOrTimes} in green.`
+          return `Kliknij i przeciągnij, aby dodać dostępne ${daysOrTimes} oznaczone na zielono.`
         case this.states.SCHEDULE_EVENT:
-          return "Click and drag on the calendar to schedule a Google Calendar event during those times."
+          return "Kliknij i przeciągnij po kalendarzu, aby zaplanować wydarzenie w Kalendarzu Google w tych godzinach."
         default:
           return ""
       }

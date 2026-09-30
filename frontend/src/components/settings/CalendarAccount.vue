@@ -153,11 +153,11 @@ export default {
     },
     reauthenticateBtnText() {
       if (this.account.calendarType == calendarTypes.GOOGLE) {
-        return "Calendar access not granted, click to reauthenticate"
+        return "Brak dostępu do kalendarza. Kliknij, aby uwierzytelnić ponownie"
       } else if (this.account.calendarType == calendarTypes.APPLE) {
-        return "Error with Apple Calendar account, click to remove"
+        return "Błąd konta Kalendarza Apple. Kliknij, aby je usunąć"
       } else if (this.account.calendarType == calendarTypes.OUTLOOK) {
-        return "Error with Outlook Calendar account, click to remove"
+        return "Błąd konta Kalendarza Outlook. Kliknij, aby je usunąć"
       }
     },
   },
@@ -204,7 +204,7 @@ export default {
           subCalendarId,
         }).catch((err) => {
           this.showError(
-            "There was a problem with toggling your calendar account! Please try again later."
+            "Nie udało się zmienić ustawień konta kalendarza. Spróbuj ponownie później."
           )
         })
       } else {
@@ -227,7 +227,7 @@ export default {
           enabled,
         }).catch((err) => {
           this.showError(
-            "There was a problem with toggling your calendar account! Please try again later."
+            "Nie udało się zmienić ustawień konta kalendarza. Spróbuj ponownie później."
           )
         })
       } else {

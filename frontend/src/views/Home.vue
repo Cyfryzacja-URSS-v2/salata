@@ -1,8 +1,5 @@
 <template>
   <span>
-    <FormerlyKnownAs
-      class="tw-mx-auto tw-mb-10 tw-mt-3 tw-max-w-6xl tw-pl-4 sm:tw-pl-12"
-    />
     <div
       class="tw-mx-auto tw-mb-24 tw-mt-4 tw-max-w-6xl tw-space-y-4 sm:tw-mb-12 sm:tw-mt-7"
     >
@@ -40,20 +37,14 @@
         <div
           class="tw-mb-3 tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
         >
-          Tools
+          Dodatki
         </div>
         <div class="tw-flex tw-flex-row tw-items-center tw-gap-2">
-          <div
-            @click="convertW2M"
-            class="tw-cursor-pointer tw-text-sm tw-font-normal tw-text-dark-gray tw-underline"
-          >
-            Convert When2meet to Timeful
-          </div>
           <div
             @click="importTimeful"
             class="tw-cursor-pointer tw-text-sm tw-font-normal tw-text-dark-gray tw-underline"
           >
-            Import Timeful Event
+            Importuj wydarzenia z Timeful
           </div>
         </div>
       </div>
@@ -82,9 +73,6 @@
         <v-icon>mdi-plus</v-icon>
       </BottomFab>
 
-      <!-- When2meet Import Dialog -->
-      <When2meetImportDialog v-model="showW2MDialog" />
-
       <!-- Timeful Import Dialog -->
       <TimefulImportDialog v-model="showImportDialog" />
     </div>
@@ -95,29 +83,24 @@
 import EventType from "@/components/EventType.vue"
 import BottomFab from "@/components/BottomFab.vue"
 import CreateSpeedDial from "@/components/CreateSpeedDial.vue"
-import When2meetImportDialog from "@/components/When2meetImportDialog.vue"
 import TimefulImportDialog from "@/components/TimefulImportDialog.vue"
 import Dashboard from "@/components/home/Dashboard.vue"
 import { mapState, mapActions, mapMutations } from "vuex"
-import { eventTypes } from "@/constants"
 import { isPhone, get } from "@/utils"
-import FormerlyKnownAs from "@/components/FormerlyKnownAs.vue"
 
 export default {
   name: "Home",
 
   metaInfo: {
-    title: "Home - Timeful",
+    title: "Panel - Sałata URSS",
   },
 
   components: {
     EventType,
     BottomFab,
     CreateSpeedDial,
-    When2meetImportDialog,
     TimefulImportDialog,
     Dashboard,
-    FormerlyKnownAs,
   },
 
   props: {

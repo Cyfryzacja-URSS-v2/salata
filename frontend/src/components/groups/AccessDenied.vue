@@ -11,14 +11,14 @@
     />
     <div class="tw-mb-8 tw-max-w-[30rem]">
       <h1 class="tw-mb-2 tw-text-center tw-text-2xl tw-font-medium">
-        You need access
+        Potrzebujesz dostępu
       </h1>
       <div class="tw-text-center tw-text-dark-gray">
-        Ask the group owner to share this group with your email: <br />
+        Poproś właściciela grupy o udostępnienie jej na Twój adres e-mail:<br />
         <span class="tw-font-medium tw-text-green">{{ authUser.email }}</span>
       </div>
     </div>
-    <v-btn href="/home" color="primary">Back to home</v-btn>
+    <v-btn href="/home" color="primary">Wróć do strony głównej</v-btn>
   </div>
 </template>
 

@@ -7,13 +7,13 @@
     <v-card-title class="tw-mb-2 tw-flex tw-gap-2 tw-px-4 sm:tw-px-8">
       <div>
         <div class="tw-mb-1">
-          {{ edit ? "Edit event" : "New event" }}
+          {{ edit ? "Edytuj wydarzenie" : "Nowe wydarzenie" }}
         </div>
         <div
           v-if="dialog && showHelp"
           class="tw-text-xs tw-font-normal tw-italic tw-text-dark-gray"
         >
-          Ideal for one-time / recurring meetings
+          Idealne do spotkań jednorazowych i cyklicznych
         </div>
       </div>
       <v-spacer />
@@ -25,10 +25,10 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
         <HelpDialog v-model="helpDialog">
-          <template v-slot:header>Events</template>
+          <template v-slot:header>Wydarzenia</template>
           <div class="tw-mb-4">
-            Use events to collect people's availabilities and compare them
-            across certain days.
+            Używaj wydarzeń, aby zbierać dostępność osób i porównywać ją w
+            wybranych dniach.
           </div>
         </HelpDialog>
       </template>
@@ -38,7 +38,7 @@
       class="tw-relative tw-flex-1 tw-overflow-auto tw-px-4 tw-py-1 sm:tw-px-8"
     >
       <AlertText v-if="edit && event?.ownerId == 0" class="tw-mb-4">
-        Anybody can edit this event because it was created while not signed in
+        Każdy może edytować to wydarzenie, ponieważ utworzono je bez logowania
       </AlertText>
       <v-form
         ref="form"
@@ -50,7 +50,7 @@
         <v-text-field
           ref="name-field"
           v-model="name"
-          placeholder="Name your event..."
+          placeholder="Nazwij wydarzenie..."
           hide-details="auto"
           solo
           @keyup.enter="blurNameField"
@@ -70,7 +70,7 @@
           <v-expand-transition>
             <div v-if="!daysOnly">
               <div class="tw-mb-2 tw-text-lg tw-text-black">
-                What times might work?
+                Jakie godziny mogą pasować?
               </div>
               <v-expand-transition>
                 <div v-if="!specificTimesEnabled">
@@ -86,7 +86,7 @@
                       hide-details
                       solo
                     ></v-select>
-                    <div>to</div>
+                    <div>do</div>
                     <v-select
                       :value="endTime"
                       @input="(t) => (endTime = t.time)"
@@ -102,7 +102,7 @@
               <div class="tw-mb-2">
                 <v-checkbox
                   v-model="specificTimesEnabled"
-                  messages="Specify the times in the next step"
+                  messages="Określ godziny w następnym kroku"
                 >
                   <template v-slot:label>
                     <span
@@ -113,7 +113,7 @@
                           : 'tw-text-very-dark-gray'
                       "
                     >
-                      Set specific times per day
+                      Ustaw konkretne godziny dla każdego dnia
                     </span>
                   </template>
                   <template v-slot:message="{ key, message }">
@@ -132,9 +132,9 @@
           </v-expand-transition>
 
           <div class="tw-mb-2 tw-text-lg tw-text-black">
-            What
-            {{ selectedDateOption === dateOptions.SPECIFIC ? "dates" : "days" }}
-            might work?
+            Jakie
+            {{ selectedDateOption === dateOptions.SPECIFIC ? "daty" : "dni" }}
+            mogą pasować?
           </div>
           <v-select
             v-if="!edit && !daysOnly"
@@ -148,7 +148,7 @@
           <v-expand-transition>
             <div v-if="selectedDateOption === dateOptions.SPECIFIC || daysOnly">
               <div class="tw-mb-2 tw-text-xs tw-text-dark-gray">
-                Drag to select multiple dates
+                Przeciągnij, aby wybrać wiele dat
               </div>
               <v-input
                 v-model="selectedDays"
@@ -177,20 +177,20 @@
                   solo
                   color="primary"
                 >
-                  <v-btn depressed v-show="!startOnMonday"> Sun </v-btn>
-                  <v-btn depressed> Mon </v-btn>
-                  <v-btn depressed> Tue </v-btn>
-                  <v-btn depressed> Wed </v-btn>
-                  <v-btn depressed> Thu </v-btn>
-                  <v-btn depressed> Fri </v-btn>
-                  <v-btn depressed> Sat </v-btn>
-                  <v-btn depressed v-show="startOnMonday"> Sun </v-btn>
+                  <v-btn depressed v-show="!startOnMonday"> Nd </v-btn>
+                  <v-btn depressed> Pn </v-btn>
+                  <v-btn depressed> Wt </v-btn>
+                  <v-btn depressed> Śr </v-btn>
+                  <v-btn depressed> Czw </v-btn>
+                  <v-btn depressed> Pt </v-btn>
+                  <v-btn depressed> Sb </v-btn>
+                  <v-btn depressed v-show="startOnMonday"> Nd </v-btn>
                 </v-btn-toggle>
               </v-input>
               <v-checkbox class="tw-mt-2" v-model="startOnMonday" hide-details>
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-very-dark-gray">
-                    Start on Monday
+                    Tydzień zaczyna się w poniedziałek
                   </span>
                 </template>
               </v-checkbox>
@@ -199,27 +199,27 @@
         </div>
 
         <v-checkbox
-          v-if="!guestEvent && authUser"
+          v-if="false"
           v-model="notificationsEnabled"
           hide-details
           class="tw-mt-2"
         >
           <template v-slot:label>
             <span class="tw-text-sm tw-text-very-dark-gray"
-              >Email me each time someone joins my event</span
+              >Wyślij mi e-mail za każdym razem, gdy ktoś dołączy do wydarzenia</span
             >
           </template>
         </v-checkbox>
         <v-checkbox
-          v-else-if="!guestEvent"
+          v-else-if="false"
           disabled
-          messages="test"
+          messages="Powiadomienia są obecnie wyłączone"
           off-icon="mdi-checkbox-blank-off-outline"
           class="tw-mt-2"
         >
           <template v-slot:label>
             <span class="tw-text-sm"
-              >Email me each time someone joins my event</span
+              >Wyślij mi e-mail za każdym razem, gdy ktoś dołączy do wydarzenia</span
             >
           </template>
           <template v-slot:message="{ key, message }">
@@ -227,8 +227,8 @@
               class="tw-pointer-events-auto -tw-mt-1 tw-ml-[32px] tw-text-xs tw-text-dark-gray"
             >
               <span class="tw-font-medium tw-text-very-dark-gray"
-                ><a @click="$emit('signIn')">Sign in</a>
-                to use this feature
+                ><a @click="$emit('signIn')">Zaloguj się</a>
+                aby użyć tej funkcji
               </span>
             </div>
           </template>
@@ -236,8 +236,8 @@
 
         <div class="tw-flex tw-flex-col tw-gap-2">
           <ExpandableSection
-            v-if="authUser && !guestEvent"
-            label="Email reminders"
+            v-if="false"
+            label="Przypomnienia e-mail"
             v-model="showEmailReminders"
             :auto-scroll="dialog"
           >
@@ -253,7 +253,7 @@
                 <template v-slot:header>
                   <div class="tw-flex tw-gap-1">
                     <div class="tw-text-very-dark-gray">
-                      Remind people to fill out the event
+                      Przypominaj osobom o uzupełnieniu wydarzenia
                     </div>
 
                     <v-tooltip
@@ -266,10 +266,8 @@
                         </v-icon>
                       </template>
                       <div>
-                        Reminder emails will be sent the day of event
-                        creation,<br />one day after, and three days after. You
-                        will also receive <br />an email when everybody has
-                        filled out the event.
+                        E-maile z przypomnieniem zostaną wysłane w dniu
+                        utworzenia wydarzenia, dzień później i po trzech dniach.
                       </div>
                     </v-tooltip>
                   </div>
@@ -280,12 +278,12 @@
 
           <ExpandableSection
             v-model="showAdvancedOptions"
-            label="Advanced options"
+            label="Opcje zaawansowane"
             :auto-scroll="dialog"
           >
             <div class="tw-flex tw-flex-col tw-gap-5 tw-pt-2">
               <div v-if="!edit" class="tw-flex tw-items-center tw-gap-x-2">
-                <div class="tw-text-sm tw-text-black">Time increment:</div>
+                <div class="tw-text-sm tw-text-black">Interwał czasu:</div>
                 <v-select
                   v-model="timeIncrement"
                   dense
@@ -302,7 +300,7 @@
               >
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-black">
-                    Collect respondents' email addresses
+                    Zbieraj adresy e-mail uczestników
                   </span>
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -316,12 +314,12 @@
               <v-checkbox
                 v-else-if="!guestEvent"
                 disabled
-                messages="test"
+                messages="Zaloguj się, aby użyć tej funkcji"
                 off-icon="mdi-checkbox-blank-off-outline"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm"
-                    >Collect respondents' email addresses</span
+                    >Zbieraj adresy e-mail uczestników</span
                   >
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -329,8 +327,8 @@
                     class="tw-pointer-events-auto -tw-mt-1 tw-ml-[32px] tw-text-xs tw-text-dark-gray"
                   >
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">Zaloguj się</a>
+                      aby użyć tej funkcji
                     </span>
                   </div>
                 </template>
@@ -338,11 +336,11 @@
               <v-checkbox
                 v-if="authUser && !guestEvent"
                 v-model="blindAvailabilityEnabled"
-                messages="Only show responses to event creator"
+                messages="Odpowiedzi uczestników będą widoczne tylko dla Ciebie"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm tw-text-black">
-                    Hide responses from respondents
+                    Ukryj odpowiedzi przed uczestnikami
                   </span>
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -356,12 +354,12 @@
               <v-checkbox
                 v-else-if="!guestEvent"
                 disabled
-                messages="Only show responses to event creator. "
+                messages="Odpowiedzi uczestników będą widoczne tylko dla Ciebie."
                 off-icon="mdi-checkbox-blank-off-outline"
               >
                 <template v-slot:label>
                   <span class="tw-text-sm"
-                    >Hide responses from respondents</span
+                    >Ukryj odpowiedzi przed uczestnikami</span
                   >
                 </template>
                 <template v-slot:message="{ key, message }">
@@ -370,14 +368,14 @@
                   >
                     {{ message }}
                     <span class="tw-font-medium tw-text-very-dark-gray"
-                      ><a @click="$emit('signIn')">Sign in</a>
-                      to use this feature
+                      ><a @click="$emit('signIn')">Zaloguj się</a>
+                      aby użyć tej funkcji
                     </span>
                   </div>
                 </template>
               </v-checkbox>
               <v-checkbox
-                v-if="authUser && !guestEvent"
+                v-if="false"
                 v-model="sendEmailAfterXResponsesEnabled"
                 hide-details
               >
@@ -386,7 +384,7 @@
                     :class="!sendEmailAfterXResponsesEnabled && 'tw-opacity-50'"
                     class="tw-flex tw-items-center tw-gap-x-2 tw-text-sm tw-text-very-dark-gray"
                   >
-                    <div>Email me after</div>
+                    <div>Wyślij e-mail po</div>
                     <v-text-field
                       v-model="sendEmailAfterXResponses"
                       @click="
@@ -403,13 +401,13 @@
                       type="number"
                       min="1"
                     ></v-text-field>
-                    <div>responses</div>
+                    <div>odpowiedziach</div>
                   </div>
                 </template>
               </v-checkbox>
               <TimezoneSelector
                 v-model="timezone"
-                label="Timezone"
+                label="Strefa czasowa"
                 @input="trackTimezoneChange"
               />
             </div>
@@ -428,14 +426,18 @@
           @click="submit"
         >
           {{
-            specificTimesEnabled ? "Next" : edit ? "Save edits" : "Create event"
+            specificTimesEnabled
+              ? "Dalej"
+              : edit
+              ? "Zapisz zmiany"
+              : "Utwórz wydarzenie"
           }}
         </v-btn>
         <div
           :class="formValid ? 'tw-invisible' : 'tw-visible'"
           class="tw-mt-1 tw-text-xs tw-text-red"
         >
-          Please fix form errors before continuing
+          Popraw błędy formularza przed kontynuowaniem
         </div>
       </div>
     </v-card-actions>
@@ -525,16 +527,16 @@ export default {
 
     daysOnly: false,
     daysOnlyOptions: Object.freeze([
-      { text: "Dates and times", value: false },
-      { text: "Dates only", value: true },
+      { text: "Daty i godziny", value: false },
+      { text: "Tylko daty", value: true },
     ]),
 
     // Date options
     dateOptions: Object.freeze({
-      SPECIFIC: "Specific dates",
-      DOW: "Days of the week",
+      SPECIFIC: "Konkretne daty",
+      DOW: "Dni tygodnia",
     }),
-    selectedDateOption: "Specific dates",
+    selectedDateOption: "Konkretne daty",
 
     // Email reminders
     showEmailReminders: false,
@@ -584,12 +586,12 @@ export default {
   computed: {
     ...mapState(["authUser", "daysOnlyEnabled"]),
     nameRules() {
-      return [(v) => !!v || "Event name is required"]
+      return [(v) => !!v || "Nazwa wydarzenia jest wymagana"]
     },
     selectedDaysRules() {
       return [
         (selectedDays) =>
-          selectedDays.length > 0 || "Please select at least one day",
+          selectedDays.length > 0 || "Wybierz co najmniej jeden dzień",
       ]
     },
     addedEmails() {
@@ -643,7 +645,7 @@ export default {
       this.selectedDaysOfWeek = []
       this.notificationsEnabled = true
       this.daysOnly = false
-      this.selectedDateOption = "Specific dates"
+      this.selectedDateOption = "Konkretne daty"
       this.emails = []
       this.showAdvancedOptions = false
       this.blindAvailabilityEnabled = false
@@ -721,16 +723,12 @@ export default {
         duration: duration,
         dates: dates,
         hasSpecificTimes: this.specificTimesEnabled,
-        notificationsEnabled: !this.authUser
-          ? false
-          : this.notificationsEnabled,
+        notificationsEnabled: false,
         blindAvailabilityEnabled: this.blindAvailabilityEnabled,
         daysOnly: this.daysOnly,
-        remindees: this.emails,
+        remindees: [],
         type: type,
-        sendEmailAfterXResponses: this.sendEmailAfterXResponsesEnabled
-          ? parseInt(this.sendEmailAfterXResponses)
-          : -1,
+        sendEmailAfterXResponses: -1,
         collectEmails: this.collectEmails,
         startOnMonday: this.startOnMonday,
         timeIncrement: this.timeIncrement,

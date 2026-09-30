@@ -31,7 +31,7 @@
       class="-tw-ml-2 tw-mt-0 tw-w-min tw-px-2 tw-text-dark-gray"
       @click="isEditing = true"
     >
-      + Add description
+      + Dodaj opis
     </v-btn>
     <div
       :class="
@@ -127,7 +127,7 @@ export default {
       this.isEditing = false
       put(`/events/${this.event._id}`, eventPayload).catch((err) => {
         console.error(err)
-        this.showError("Failed to save description! Please try again later.")
+        this.showError("Nie udało się zapisać opisu. Spróbuj ponownie później.")
         this.$emit("update:event", {
           ...oldEvent,
         })

@@ -42,7 +42,7 @@
       {{ timeRangeString }}
     </div>
     <div v-if="isOwner" class="tw-mt-4 tw-flex tw-items-center tw-gap-4">
-      <div class="tw-text-xs">People per slot</div>
+      <div class="tw-text-xs">Osób na miejsce</div>
       <div class="tw-flex tw-h-4 tw-items-center">
         <div v-if="isEditing" class="-tw-mt-2 tw-w-20">
           <v-select
@@ -85,7 +85,7 @@
         <div v-if="!anonymize || response.user._id == authUser._id" class="tw-transition-all tw-text-sm">
           {{ response.user.firstName + " " + response.user.lastName }}
         </div>
-        <div v-else class="tw-transition-all tw-text-sm tw-italic">Attendee</div>
+        <div v-else class="tw-transition-all tw-text-sm tw-italic">Uczestnik</div>
       </div>
     </div>
 
@@ -94,7 +94,7 @@
         class="tw-text-xs tw-text-red"
         text
         @click="$emit('delete:signUpBlock', signUpBlock._id)"
-        >Delete slot</a
+        >Usuń miejsce</a
       >
     </div>
 
@@ -103,7 +103,7 @@
         class="tw-text-xs tw-text-green"
         text
         @click="joinSlot"
-        >+ Join this slot</a
+        >+ Dołącz do tego miejsca</a
       >
     </div>
   </div>

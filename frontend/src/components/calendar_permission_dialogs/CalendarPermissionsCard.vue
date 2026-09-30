@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="tw-text-md tw-mb-4 tw-font-medium">
-      We need the following permissions to access your Google Calendar events
+      Potrzebujemy następujących uprawnień, aby uzyskać dostęp do wydarzeń w Kalendarzu Google
     </div>
 
     <div class="tw-mb-8 tw-ml-4 tw-flex tw-flex-col tw-gap-4">
@@ -12,7 +12,7 @@
           height="20"
           width="20"
         />
-        <div>View events on all your calendars.</div>
+        <div>Wyświetlanie wydarzeń ze wszystkich kalendarzy.</div>
       </div>
       <div class="tw-flex tw-gap-2 tw-text-sm">
         <v-img
@@ -21,18 +21,17 @@
           height="20"
           width="20"
         />
-        <div>See the list of Google calendars you’re subscribed to.</div>
+        <div>Wyświetlanie listy subskrybowanych kalendarzy Google.</div>
       </div>
     </div>
 
-    <div class="tw-text-md tw-mb-4 tw-font-medium">These permissions will</div>
+    <div class="tw-text-md tw-mb-4 tw-font-medium">Te uprawnienia pozwolą</div>
     <div
       class="tw-mb-8 tw-flex tw-flex-col tw-gap-4 tw-text-sm tw-text-very-dark-gray"
     >
-      <div>Allow us to display the names/times of your calendar events</div>
+      <div>wyświetlać nazwy i godziny wydarzeń w kalendarzu</div>
       <div>
-        Allow us to display calendar events on all calendars, not just your
-        primary calendar
+        wyświetlać wydarzenia ze wszystkich kalendarzy, nie tylko głównego
       </div>
     </div>
 
@@ -53,8 +52,8 @@ export default {
   name: "CalendarPermissionsCard",
 
   props: {
-    cancelLabel: { type: String, default: "Cancel" },
-    allowLabel: { type: String, default: "Allow" },
+    cancelLabel: { type: String, default: "Anuluj" },
+    allowLabel: { type: String, default: "Zezwól" },
   },
 }
 </script>
