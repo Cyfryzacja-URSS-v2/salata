@@ -145,7 +145,10 @@
         </template>
       </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> upstream/main
   </div>
 </template>
 
@@ -156,7 +159,7 @@ import { isPhone } from "@/utils"
 import ExpandableSection from "../ExpandableSection.vue"
 import EventOptions from "./EventOptions.vue"
 import { timeTypes, guestUserId } from "@/constants"
-import { mapState, mapGetters } from "vuex"
+import { mapState } from "vuex"
 
 export default {
   name: "ToolRow",
@@ -198,15 +201,17 @@ export default {
     ],
   }),
 
+<<<<<<< HEAD
   mounted() {
   },
 
   methods: {
   },
 
+=======
+>>>>>>> upstream/main
   computed: {
     ...mapState(["authUser"]),
-    ...mapGetters(["isPremiumUser"]),
     isPhone() {
       return isPhone(this.$vuetify)
     },

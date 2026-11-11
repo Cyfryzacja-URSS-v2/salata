@@ -873,8 +873,12 @@
         <!-- Fixed bottom section for mobile -->
         <div
           v-if="isPhone && !calendarOnly"
+<<<<<<< HEAD
           class="tw-fixed tw-z-20 tw-w-full"
           :style="{ bottom: '4rem' }"
+=======
+          class="tw-fixed tw-bottom-16 tw-z-20 tw-w-full"
+>>>>>>> upstream/main
         >
           <!-- Hint text (mobile) -->
           <v-expand-transition>
@@ -1029,9 +1033,10 @@ import {
   getISODateString,
   getDateWithTimezone,
   getScheduleTimezoneOffset,
+  getTimezoneOffsetForDate,
+  getDowTimezoneShift,
   getTimezoneReferenceDateForEvent,
   timeNumToTimeString,
-  isPremiumUser,
   prefersStartOnMonday,
 } from "@/utils"
 import {
@@ -1041,9 +1046,8 @@ import {
   guestUserId,
   timeTypes,
   timeslotDurations,
-  upgradeDialogTypes,
 } from "@/constants"
-import { mapMutations, mapActions, mapState, mapGetters } from "vuex"
+import { mapMutations, mapActions, mapState } from "vuex"
 import UserAvatarContent from "@/components/UserAvatarContent.vue"
 import CalendarAccounts from "@/components/settings/CalendarAccounts.vue"
 import SignUpBlock from "@/components/sign_up_form/SignUpBlock.vue"
@@ -1075,7 +1079,6 @@ export default {
   name: "ScheduleOverlap",
   props: {
     event: { type: Object, required: true },
-    ownerIsPremium: { type: Boolean, default: false },
     fromEditEvent: { type: Boolean, default: false },
 
     loadingCalendarEvents: { type: Boolean, default: false }, // Whether we are currently loading the calendar events
@@ -2267,12 +2270,18 @@ export default {
   },
   methods: {
     ...mapMutations(["setAuthUser"]),
-    ...mapActions(["showInfo", "showError", "showUpgradeDialog"]),
+    ...mapActions(["showInfo", "showError"]),
 
     // -----------------------------------
     //#region Date
     // -----------------------------------
 
+    /** Returns the selected timezone's offset at the given date (DST-aware, unlike this.timezoneOffset) */
+    getTimezoneOffsetAt(date) {
+      // Weekly and group dates are reference dates, so the viewed week's offset applies
+      if (!this.isSpecificDates) return this.timezoneOffset
+      return getTimezoneOffsetForDate(this.curTimezone, date)
+    },
     /** Returns a date object from the dayindex and hoursoffset given */
     getDateFromDayHoursOffset(dayIndex, hoursOffset) {
       return getDateHoursOffset(this.days[dayIndex].dateObject, hoursOffset)
@@ -3357,9 +3366,9 @@ export default {
               if (!this.event.daysOnly) {
                 const date = this.getDateFromRowCol(row, col)
                 if (date) {
-                  // Debug logging for hover slot
-
-                  date.setTime(date.getTime() - this.timezoneOffset * 60 * 1000)
+                  date.setTime(
+                    date.getTime() - this.getTimezoneOffsetAt(date) * 60 * 1000
+                  )
                   const startDate = dayjs(date).utc()
                   const endDate = dayjs(date)
                     .utc()
@@ -3542,15 +3551,6 @@ export default {
     /** Redirect user to Google Calendar to finish the creation of the event */
     confirmScheduleEvent(googleCalendar = true) {
       if (!this.curScheduledEvent) return
-      // if (!isPremiumUser(this.authUser)) {
-      //   this.showUpgradeDialog({
-      //     type: upgradeDialogTypes.SCHEDULE_EVENT,
-      //     data: {
-      //       scheduledEvent: this.curScheduledEvent,
-      //     },
-      //   })
-      //   return
-      // }
 
       this.$posthog.capture("schedule_event_confirmed")
       // Get start date, and end date from the area that the user has dragged out
@@ -3574,8 +3574,15 @@ export default {
         }
 
         // Transform startDate and endDate to be the current week offset
-        startDate = dateToDowDate(this.event.dates, startDate, offset, true)
-        endDate = dateToDowDate(this.event.dates, endDate, offset, true)
+        const shiftMs = getDowTimezoneShift(this.event, offset) * 60 * 1000
+        startDate = new Date(
+          dateToDowDate(this.event.dates, startDate, offset, true).getTime() +
+            shiftMs
+        )
+        endDate = new Date(
+          dateToDowDate(this.event.dates, endDate, offset, true).getTime() +
+            shiftMs
+        )
       }
 
       // Format email string separated by commas
@@ -4318,10 +4325,12 @@ export default {
 
       // Set event dates to start at the new times
       for (let i = 0; i < this.event.dates.length; ++i) {
+        // Use each date's own offset so dates after a DST change keep the same local start time
         const date = new Date(this.event.dates[i])
-        date.setTime(date.getTime() - this.timezoneOffset * 60 * 1000)
+        const offset = this.getTimezoneOffsetAt(date)
+        date.setTime(date.getTime() - offset * 60 * 1000)
         date.setUTCHours(minHours, 0, 0, 0)
-        date.setTime(date.getTime() + this.timezoneOffset * 60 * 1000)
+        date.setTime(date.getTime() + offset * 60 * 1000)
         this.event.dates[i] = date.toISOString()
       }
 
@@ -4350,7 +4359,7 @@ export default {
       for (const time of times) {
         const timeDate = new Date(time)
         const date = new Date(
-          timeDate.getTime() - this.timezoneOffset * 60 * 1000
+          timeDate.getTime() - this.getTimezoneOffsetAt(timeDate) * 60 * 1000
         )
         const localHours = date.getUTCHours()
         if (localHours < minHours) {
@@ -4575,7 +4584,11 @@ export default {
     addEventListener("resize", this.onResize)
     addEventListener("scroll", this.onScroll)
 
+<<<<<<< HEAD
     // Watch for layout changes that resize the calendar.
+=======
+    // Watch for layout changes (e.g. flex reflows) that resize
+>>>>>>> upstream/main
     // the grid without triggering a window resize event
     const dragSection = document.getElementById("drag-section")
     if (dragSection) {

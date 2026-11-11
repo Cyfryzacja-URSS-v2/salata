@@ -25,7 +25,6 @@ export const authTypes = Object.freeze({
   GROUP_CREATE: "group-create",
   ADD_CALENDAR_ACCOUNT: "add-calendar-account",
   ADD_CALENDAR_ACCOUNT_FROM_EDIT: "add-calendar-account-from-edit",
-  UPGRADE: "upgrade",
 })
 
 export const eventTypes = Object.freeze({
@@ -49,13 +48,6 @@ export const calendarTypes = Object.freeze({
   APPLE: "apple",
   OUTLOOK: "outlook",
   ICS: "ics"
-})
-
-export const upgradeDialogTypes = Object.freeze({
-  CREATE_EVENT: "create-event",
-  SCHEDULE_EVENT: "schedule-event",
-  UPGRADE_MANUALLY: "upgrade-manually",
-  REMOVE_ADS: "remove-ads",
 })
 
 export const timeslotDurations = Object.freeze({
@@ -105,10 +97,10 @@ export const allTimezones = Object.freeze({
   "America/Dawson": "Dawson, Yukon",
   "America/Chihuahua": "Chihuahua, La Paz, Mazatlan",
   "America/Phoenix": "Arizona",
-  "America/Chicago": "Central Time",
+  "America/Chicago": "Central Time (US & Canada)",
   "America/Regina": "Saskatchewan",
   "America/Mexico_City": "Guadalajara, Mexico City, Monterrey",
-  "America/Belize": "Central America",
+  "America/Belize": "Central America (Belize, Guatemala)",
   "America/New_York": "Eastern Time",
   "America/Bogota": "Bogota, Lima, Quito",
   "America/Caracas": "Caracas, La Paz",
@@ -120,6 +112,7 @@ export const allTimezones = Object.freeze({
   "America/Argentina/Buenos_Aires": "Buenos Aires, Georgetown",
   "America/Godthab": "Greenland",
   "America/Los_Angeles": "Pacific Time",
+  "America/Vancouver": "Pacific Time (British Columbia)",
   "Atlantic/Azores": "Azores",
   "Atlantic/Cape_Verde": "Cape Verde Islands",
   GMT: "UTC",
@@ -180,7 +173,5 @@ export const allTimezones = Object.freeze({
 })
 
 export const guestUserId = "000000000000000000000000"
-
-export const numFreeEvents = 3
 
 export const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/

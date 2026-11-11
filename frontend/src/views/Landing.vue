@@ -23,6 +23,20 @@
         <div
           class="tw-mb-6 tw-flex tw-max-w-[26rem] tw-flex-col tw-items-center sm:tw-w-[35rem] sm:tw-max-w-none"
         >
+          <a
+            href="/blog/timeful-is-now-free/"
+            class="tw-mb-3 tw-rounded-2xl tw-border tw-border-green/40 tw-bg-green/10 tw-px-4 tw-py-1.5 tw-text-center tw-text-sm tw-text-very-dark-gray hover:tw-bg-green/20"
+          >
+            🎉 Timeful is now completely free to use!
+            <span class="tw-hidden md:tw-inline"
+              >We got rid of the banner ads + our premium subscription tier.{{
+                " "
+              }}</span
+            >
+            <span class="tw-whitespace-nowrap tw-font-medium tw-text-green"
+              >Read more on our blog →</span
+            >
+          </a>
           <div
             class="tw-mb-4 tw-flex tw-select-none tw-items-center tw-rounded-full tw-border tw-border-light-gray-stroke tw-bg-white/70 tw-px-2.5 tw-py-1.5 tw-text-sm tw-text-dark-gray"
           >
@@ -159,7 +173,11 @@ export default {
   name: "Landing",
 
   metaInfo: {
+<<<<<<< HEAD
     title: "Sałata URSS - Ustal spotkanie",
+=======
+    title: "Timeful - Find a time to meet",
+>>>>>>> upstream/main
   },
 
   components: {

@@ -116,14 +116,6 @@ the frontend build.
 | `ENCRYPTION_KEY` | Key for encrypting sensitive data (generate with `openssl rand -base64 32`) |
 | `SESSION_SECRET` | Session cookie encryption key (generate with `openssl rand -base64 32`)     |
 
-#### Optional — Payments
-
-| Variable                | Description                        |
-| ----------------------- | ---------------------------------- |
-| `STRIPE_API_KEY`        | Stripe API key                     |
-| `STRIPE_WEBHOOK_SECRET` | Stripe webhook signing secret      |
-| `STRIPE_*_PRICE_ID`     | Stripe price IDs for various plans |
-
 #### Optional — Additional Calendars
 
 | Variable                  | Description                             |
@@ -144,9 +136,11 @@ the frontend build.
 | `ANALYTICS_USERNAME` / `ANALYTICS_PASSWORD`  | Basic auth for /api/analytics routes         |
 | `SERVICE_ACCOUNT_KEY_PATH`                   | Google Cloud service account for Cloud Tasks |
 | `SLACK_*_WEBHOOK_URL`                        | Slack webhooks for notifications             |
+| `SLACK_SIGNING_SECRET`                       | Verifies /api/slackbot slash commands        |
 | `GMAIL_APP_PASSWORD` / `SCHEJ_EMAIL_ADDRESS` | Gmail SMTP for sending emails                |
 | `LISTMONK_*`                                 | Listmonk email service configuration         |
 | `DISCORD_BOT_TOKEN` / `GUILD_ID`             | Discord bot integration                      |
+| `TRUSTED_PROXIES`                            | Proxy IPs allowed to set X-Forwarded-For     |
 
 See `server/.env.template` for the complete list.
 

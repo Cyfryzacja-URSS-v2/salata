@@ -213,11 +213,14 @@ export const lightOrDark = (color) => {
   }
 }
 
+<<<<<<< HEAD
 /** Returns whether the given user is a premium user */
 export const isPremiumUser = (authUser) => {
   return Boolean(authUser)
 }
 
+=======
+>>>>>>> upstream/main
 /** Adds an event ID to the 'eventsCreated' list in localStorage */
 export const addEventToCreatedList = (eventId) => {
   let eventsCreated = getEventsCreated()

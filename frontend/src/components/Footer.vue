@@ -43,6 +43,111 @@
             | AGPL-3.0.
           </div>
         </div>
+<<<<<<< HEAD
+=======
+        <!-- Links -->
+        <div class="tw-flex tw-flex-col tw-gap-2">
+          <div class="tw-mb-1 tw-font-bold">Links</div>
+          <div>
+            <a href="/blog" class="tw-text-sm">Blog</a>
+          </div>
+          <div>
+            <v-menu :nudge-bottom="10" offset-y :close-on-content-click="false">
+              <template v-slot:activator="{ on, attrs }">
+                <span
+                  class="tw-cursor-pointer tw-text-sm tw-text-white/80 hover:tw-text-white"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  Contact us
+                </span>
+              </template>
+              <v-card class="tw-p-3">
+                <div class="tw-text-sm">
+                  Email us at
+                  <span class="tw-text-green tw-underline"
+                    >contact@timeful.app</span
+                  >
+                </div>
+              </v-card>
+            </v-menu>
+          </div>
+          <div>
+            <a
+              href="https://forms.gle/A96i4TTWeKgH3P1W6"
+              target="_blank"
+              class="tw-text-sm"
+              >Give Feedback</a
+            >
+          </div>
+          <div>
+            <a
+              href="https://www.paypal.com/donate/?hosted_button_id=KWCH6LGJCP6E6"
+              target="_blank"
+              class="tw-text-sm"
+              >Donate</a
+            >
+          </div>
+        </div>
+        <!-- Articles -->
+        <div class="tw-flex tw-flex-col tw-gap-2">
+          <div class="tw-mb-1 tw-font-bold">Articles</div>
+          <div>
+            <a href="/blog/timeful-is-now-free/" class="tw-text-sm"
+              >Timeful is now completely free</a
+            >
+          </div>
+          <div>
+            <a href="/blog/schej-is-now-timeful/" class="tw-text-sm"
+              >Schej is now Timeful</a
+            >
+          </div>
+          <div>
+            <a href="/blog/about/" class="tw-text-sm"
+              >Welcome to the Timeful blog!</a
+            >
+          </div>
+          <div>
+            <a href="/blog/doodle/" class="tw-text-sm">Timeful vs Doodle</a>
+          </div>
+          <div>
+            <a href="/blog/when2meet/" class="tw-text-sm"
+              >Timeful vs When2meet</a
+            >
+          </div>
+          <div>
+            <a href="/blog/gcalandwhen2meet/" class="tw-text-sm"
+              >How to use When2meet with Google Calendar</a
+            >
+          </div>
+        </div>
+        <!-- Reddit posts -->
+        <div class="tw-flex tw-flex-col tw-gap-2">
+          <div class="tw-mb-1 tw-font-bold">Reddit posts</div>
+          <div>
+            <a
+              href="https://www.reddit.com/r/opensource/comments/1dlol7r/i_made_a_better_when2meet/"
+              target="_blank"
+              class="tw-text-sm"
+              >I made a better when2meet</a
+            >
+          </div>
+          <div>
+            <a
+              href="https://www.reddit.com/r/opensource/comments/1klu471/i_made_a_doodle_alternative/"
+              target="_blank"
+              class="tw-text-sm"
+              >I made a Doodle alternative</a
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="tw-mt-8 tw-border-t tw-border-white/20 tw-pt-4 tw-text-sm tw-text-white/80"
+      >
+        &copy; {{ new Date().getFullYear() }} Liu Laboratories LLC. All rights
+        reserved.
+>>>>>>> upstream/main
       </div>
     </div>
   </footer>

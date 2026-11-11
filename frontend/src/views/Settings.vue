@@ -43,6 +43,7 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Billing Section -->
       <div
         v-if="authUser.stripeCustomerId"
@@ -60,6 +61,8 @@
         </div>
       </div>
 
+=======
+>>>>>>> upstream/main
       <!-- Calendar Access Section -->
       <div class="tw-flex tw-flex-col tw-gap-5">
         <div
@@ -189,7 +192,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex"
-import { _delete, patch, isPhone, get } from "@/utils"
+import { _delete, patch, isPhone } from "@/utils"
 import CalendarAccounts from "@/components/settings/CalendarAccounts.vue"
 
 export default {
@@ -242,6 +245,7 @@ export default {
 
   methods: {
     ...mapActions(["showError"]),
+<<<<<<< HEAD
     openBillingPortal() {
       get(
         `/stripe/billing-portal?customerId=${encodeURIComponent(
@@ -257,6 +261,8 @@ export default {
           )
         })
     },
+=======
+>>>>>>> upstream/main
     deleteAccount() {
       _delete(`/user`)
         .then(() => {

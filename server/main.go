@@ -19,7 +19,6 @@ import (
 	"github.com/gin-contrib/sessions/cookie"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/stripe/stripe-go/v82"
 	"schej.it/server/db"
 	"schej.it/server/logger"
 	"schej.it/server/routes"
@@ -72,6 +71,13 @@ func main() {
 
 	// Init router
 	router := gin.New()
+
+	// Only read the client IP from X-Forwarded-For when the request comes from our reverse proxy,
+	// otherwise clients could spoof it (the IP is used for rate limiting)
+	if err := router.SetTrustedProxies(getTrustedProxies()); err != nil {
+		log.Fatal(err)
+	}
+
 	router.Use(gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
 		var statusColor, methodColor, resetColor string
 		if param.IsOutputColor() {
@@ -128,7 +134,6 @@ func main() {
 	routes.InitUsers(apiRouter)
 	routes.InitEvents(apiRouter)
 	routes.InitAnalytics(apiRouter)
-	routes.InitStripe(apiRouter)
 	routes.InitFolders(apiRouter)
 	slackbot.InitSlackbot(apiRouter)
 
@@ -182,9 +187,6 @@ func loadDotEnv() {
 		logger.StdOut.Println("No .env file found, using environment variables")
 	}
 
-	// Load stripe key
-	stripe.Key = os.Getenv("STRIPE_API_KEY")
-
 	// Validate session secret
 	validateSessionSecret()
 }
@@ -203,6 +205,15 @@ func validateSessionSecret() {
 	}
 }
 
+// Returns the IPs/CIDRs of the reverse proxies allowed to set X-Forwarded-For. Defaults to loopback
+// and private ranges, which covers a proxy on the same host or Docker network
+func getTrustedProxies() []string {
+	if proxies := os.Getenv("TRUSTED_PROXIES"); proxies != "" {
+		return utils.Map(strings.Split(proxies, ","), strings.TrimSpace)
+	}
+	return []string{"127.0.0.1", "::1", "10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "fc00::/7"}
+}
+
 func noRouteHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		params := gin.H{}
@@ -214,8 +225,6 @@ func noRouteHandler() gin.HandlerFunc {
 			eventId := path[match[2]:match[3]]
 			event := db.GetEventByEitherId(eventId)
 
-			// params["enableStickyFooter"] = true
-
 			if event != nil {
 				title := fmt.Sprintf("%s - Sałata URSS", event.Name)
 				params["title"] = title
@@ -225,9 +234,6 @@ func noRouteHandler() gin.HandlerFunc {
 					params["ogImage"] = "/img/when2meetOgImage2.png"
 				}
 			}
-		} else if regexp.MustCompile(`\/g\/`).MatchString(path) {
-			// /g/ routes
-			// params["enableStickyFooter"] = true
 		}
 
 		c.HTML(http.StatusOK, "index.html", params)

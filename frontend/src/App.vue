@@ -15,10 +15,6 @@
       :no-tabs="newDialogOptions.eventOnly"
       :folder-id="newDialogOptions.folderId"
     />
-    <UpgradeDialog
-      :value="upgradeDialogVisible"
-      @input="handleUpgradeDialogInput"
-    />
     <div
       v-if="showHeader"
       class="tw-fixed tw-z-40 tw-h-14 tw-w-screen tw-bg-white sm:tw-h-16"
@@ -201,7 +197,7 @@ html {
 </style>
 
 <script>
-import { mapMutations, mapState, mapActions, mapGetters } from "vuex"
+import { mapMutations, mapState, mapActions } from "vuex"
 import {
   get,
   getLocation,
@@ -209,15 +205,13 @@ import {
   post,
   signInGoogle,
   signInOutlook,
-  isPremiumUser,
 } from "@/utils"
-import { authTypes, calendarTypes } from "@/constants"
+import { authTypes, calendarTypes, eventTypes } from "@/constants"
 import AutoSnackbar from "@/components/AutoSnackbar"
 import AuthUserMenu from "@/components/AuthUserMenu.vue"
 import SignInNotSupportedDialog from "@/components/SignInNotSupportedDialog.vue"
 import isWebview from "is-ua-webview"
 import NewDialog from "./components/NewDialog.vue"
-import UpgradeDialog from "@/components/pricing/UpgradeDialog.vue"
 import SignInDialog from "@/components/SignInDialog.vue"
 
 export default {
@@ -234,7 +228,8 @@ export default {
     AuthUserMenu,
     SignInNotSupportedDialog,
     NewDialog,
-    UpgradeDialog,
+    UpvoteRedditSnackbar,
+    Logo,
     SignInDialog,
   },
 
@@ -247,15 +242,7 @@ export default {
   }),
 
   computed: {
-    ...mapGetters(["isPremiumUser"]),
-    ...mapState([
-      "authUser",
-      "error",
-      "info",
-      "enablePaywall",
-      "upgradeDialogVisible",
-      "newDialogOptions",
-    ]),
+    ...mapState(["authUser", "error", "info", "newDialogOptions"]),
     isPhone() {
       return isPhone(this.$vuetify)
     },
@@ -287,16 +274,9 @@ export default {
     ...mapMutations([
       "setAuthUser",
       "setSignUpFormEnabled",
-      "setPricingPageConversion",
-      "setEnablePaywall",
       "setFeatureFlagsLoaded",
     ]),
-    ...mapActions([
-      "getEvents",
-      "showUpgradeDialog",
-      "hideUpgradeDialog",
-      "createNew",
-    ]),
+    ...mapActions(["getEvents", "createNew"]),
     handleScroll(e) {
       this.scrollY = window.scrollY
     },
@@ -368,20 +348,10 @@ export default {
       if (!this.$posthog) return
 
       // this.setSignUpFormEnabled(this.$posthog.isFeatureEnabled("sign-up-form"))
-      // this.setPricingPageConversion(
-      // this.$posthog.getFeatureFlag("pricing-page-conversion")
-      // )
-      // )
-      // this.setEnablePaywall(this.$posthog.isFeatureEnabled("enable-paywall"))
       this.setFeatureFlagsLoaded(true)
     },
     trackFeedbackClick() {
       this.$posthog.capture("give_feedback_button_clicked")
-    },
-    handleUpgradeDialogInput(value) {
-      if (!value) {
-        this.hideUpgradeDialog()
-      }
     },
   },
 
