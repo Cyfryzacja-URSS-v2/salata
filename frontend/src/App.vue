@@ -229,7 +229,6 @@ export default {
     SignInNotSupportedDialog,
     NewDialog,
     UpvoteRedditSnackbar,
-    Logo,
     SignInDialog,
   },
 

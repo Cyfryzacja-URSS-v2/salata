@@ -55,7 +55,6 @@
 import { calendarTypes } from "@/constants"
 import { post, signInGoogle, signInOutlook } from "@/utils"
 import { mapMutations } from "vuex"
-import Logo from "@/components/Logo.vue"
 
 export default {
   name: "SignIn",
@@ -64,10 +63,6 @@ export default {
     return {
       title: "Logowanie - Sałata URSS",
     }
-  },
-
-  components: {
-    Logo,
   },
 
   data() {
