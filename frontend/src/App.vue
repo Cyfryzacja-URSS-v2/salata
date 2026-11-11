@@ -228,7 +228,6 @@ export default {
     AuthUserMenu,
     SignInNotSupportedDialog,
     NewDialog,
-    UpvoteRedditSnackbar,
     SignInDialog,
   },
 
