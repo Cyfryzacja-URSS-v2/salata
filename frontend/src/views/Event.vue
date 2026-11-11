@@ -116,15 +116,8 @@
         </v-card>
       </v-dialog>
 
-<<<<<<< HEAD
-      <div
-        class="tw-mx-auto tw-mt-4 lg:tw-flex lg:tw-items-start lg:tw-justify-center lg:tw-gap-6"
-      >
-        <div class="tw-mx-auto tw-max-w-5xl tw-flex-1">
-=======
       <div class="tw-mt-4">
         <div class="tw-mx-auto tw-max-w-5xl">
->>>>>>> upstream/main
           <div v-if="!isSettingSpecificTimes" class="tw-mx-4">
             <!-- Title and copy link -->
             <div class="tw-flex tw-items-center tw-text-black">
@@ -311,10 +304,6 @@
         </div>
       </div>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
       <template v-if="showFeedbackBtn">
         <div class="tw-w-full tw-border-t tw-border-solid tw-border-gray"></div>
 
@@ -348,22 +337,8 @@
       </template>
 
       <div
-<<<<<<< HEAD
         class="tw-h-8"
       ></div>
-=======
-        class="tw-mb-16 tw-hidden tw-flex-col tw-items-center tw-justify-between sm:tw-flex"
-      >
-        <router-link
-          class="tw-text-xs tw-font-medium tw-text-gray"
-          :to="{ name: 'privacy-policy' }"
-        >
-          Privacy Policy
-        </router-link>
-      </div>
-
-      <div class="tw-h-8"></div>
->>>>>>> upstream/main
       <!-- Bottom bar for phones -->
       <div
         v-if="!isSettingSpecificTimes && isPhone && (!isSignUp || canEdit)"
@@ -530,10 +505,6 @@ export default {
     scheduleOverlapComponent: null,
     scheduleOverlapComponentLoaded: false,
 
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
     curGuestId: "", // Id of the current guest being edited
     calendarPermissionGranted: true,
     addingAvailabilityAsGuest: false, // Whether a signed in user is current adding availability as a guest
@@ -647,10 +618,6 @@ export default {
     ...mapActions(["showError", "showInfo", "getEvents"]),
     ...mapMutations(["setAuthUser"]),
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/main
     /** Show choice dialog if not signed in, otherwise, immediately start editing availability */
     addAvailability() {
       if (!this.scheduleOverlapComponent) return
@@ -751,10 +718,6 @@ export default {
       processEvent(this.event)
     },
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/main
     setAvailabilityAutomatically(calendarType = calendarTypes.GOOGLE) {
       /* Prompts user to sign in when "set availability automatically" button clicked */
       if (isWebview(navigator.userAgent)) {
@@ -1831,11 +1794,7 @@ export default {
         this.$nextTick(() => {
           this.scheduleOverlapComponent = this.$refs.scheduleOverlap
         })
-<<<<<<< HEAD
         document.title = `${this.event.name} - Sałata URSS`
-=======
-        document.title = `${this.event.name} - Timeful`
->>>>>>> upstream/main
       }
     },
     scheduleOverlapComponent() {

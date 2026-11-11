@@ -145,10 +145,6 @@
         </template>
       </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> upstream/main
   </div>
 </template>
 
@@ -201,15 +197,6 @@ export default {
     ],
   }),
 
-<<<<<<< HEAD
-  mounted() {
-  },
-
-  methods: {
-  },
-
-=======
->>>>>>> upstream/main
   computed: {
     ...mapState(["authUser"]),
     isPhone() {

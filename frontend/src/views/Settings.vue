@@ -43,26 +43,6 @@
         </div>
       </div>
 
-<<<<<<< HEAD
-      <!-- Billing Section -->
-      <div
-        v-if="authUser.stripeCustomerId"
-        class="tw-flex tw-flex-col tw-gap-5"
-      >
-        <div
-          class="tw-text-xl tw-font-medium tw-text-dark-green sm:tw-text-2xl"
-        >
-          Płatności
-        </div>
-        <div class="tw-flex tw-flex-col tw-gap-5 sm:tw-flex-row sm:tw-gap-28">
-          <div class="tw-text-black">
-            <v-btn @click="openBillingPortal">Zarządzaj płatnościami</v-btn>
-          </div>
-        </div>
-      </div>
-
-=======
->>>>>>> upstream/main
       <!-- Calendar Access Section -->
       <div class="tw-flex tw-flex-col tw-gap-5">
         <div
@@ -245,24 +225,6 @@ export default {
 
   methods: {
     ...mapActions(["showError"]),
-<<<<<<< HEAD
-    openBillingPortal() {
-      get(
-        `/stripe/billing-portal?customerId=${encodeURIComponent(
-          this.authUser.stripeCustomerId
-        )}&returnUrl=${encodeURIComponent(window.location.href)}`
-      )
-        .then((res) => {
-          window.location.href = res.url
-        })
-        .catch((err) => {
-          this.showError(
-            "Nie udało się otworzyć panelu płatności. Spróbuj ponownie później."
-          )
-        })
-    },
-=======
->>>>>>> upstream/main
     deleteAccount() {
       _delete(`/user`)
         .then(() => {

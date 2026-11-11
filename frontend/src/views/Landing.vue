@@ -173,11 +173,7 @@ export default {
   name: "Landing",
 
   metaInfo: {
-<<<<<<< HEAD
     title: "Sałata URSS - Ustal spotkanie",
-=======
-    title: "Timeful - Find a time to meet",
->>>>>>> upstream/main
   },
 
   components: {

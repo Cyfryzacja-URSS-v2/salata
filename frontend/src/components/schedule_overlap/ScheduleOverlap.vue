@@ -873,12 +873,7 @@
         <!-- Fixed bottom section for mobile -->
         <div
           v-if="isPhone && !calendarOnly"
-<<<<<<< HEAD
-          class="tw-fixed tw-z-20 tw-w-full"
-          :style="{ bottom: '4rem' }"
-=======
           class="tw-fixed tw-bottom-16 tw-z-20 tw-w-full"
->>>>>>> upstream/main
         >
           <!-- Hint text (mobile) -->
           <v-expand-transition>
@@ -4584,11 +4579,7 @@ export default {
     addEventListener("resize", this.onResize)
     addEventListener("scroll", this.onScroll)
 
-<<<<<<< HEAD
-    // Watch for layout changes that resize the calendar.
-=======
     // Watch for layout changes (e.g. flex reflows) that resize
->>>>>>> upstream/main
     // the grid without triggering a window resize event
     const dragSection = document.getElementById("drag-section")
     if (dragSection) {
